@@ -83,6 +83,18 @@ body.landing {
   border-radius: 8px;
   font-weight: 600;
 }
+.lang-toggle {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.22);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+.lang-toggle:hover { border-color: var(--text); }
 
 /* HERO — one composition, brand first, full-bleed atmosphere */
 .hero {

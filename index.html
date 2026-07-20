@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NicheScope — Audits YouTube qui monétisent</title>
-  <meta name="description" content="Trouve les niches YouTube qui rapportent. Audit Flash ou Audit Studio : Cash Score, concurrents, calendrier éditorial, briefs titres & thumbnails." />
-  <meta property="og:title" content="NicheScope — Audits YouTube qui monétisent" />
-  <meta property="og:description" content="Où est l’argent dans ta niche, qui le prend, et quoi publier les 4 prochaines semaines." />
+  <title>NicheScope — YouTube audits that monetize</title>
+  <meta name="description" id="meta-desc" content="Find YouTube niches that make money. Flash Audit or Studio Audit: Cash Score, competitors, editorial calendar, title & thumbnail briefs." />
+  <meta property="og:title" id="og-title" content="NicheScope — YouTube audits that monetize" />
+  <meta property="og:description" id="og-desc" content="Where the money is in your niche, who takes it, and what to publish for the next 4 weeks." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="landing.css" />
 </head>
 <body class="landing">
-  <a class="skip-link" href="#hero">Contenu</a>
+  <a class="skip-link" href="#hero" data-i18n="skip">Content</a>
 
   <header class="land-nav">
     <a class="land-brand" href="./">
@@ -22,9 +22,10 @@
       <span class="land-name" id="brand-name">NicheScope</span>
     </a>
     <nav class="land-nav-links">
-      <a href="#offres">Offres</a>
-      <a href="app.html">Ouvrir l’app</a>
-      <a class="land-nav-cta" id="nav-calendly" href="#offres">Réserver</a>
+      <a href="#offres" data-i18n="nav_offers">Offers</a>
+      <a href="app.html" data-i18n="nav_app">Open app</a>
+      <button type="button" class="lang-toggle" id="langToggle" aria-label="Language">FR</button>
+      <a class="land-nav-cta" id="nav-calendly" href="#offres" data-i18n="nav_book">Book</a>
     </nav>
   </header>
 
@@ -34,52 +35,52 @@
       <div class="hero-copy">
         <p class="hero-brand" id="hero-brand">NicheScope</p>
         <h1 class="hero-title">
-          Les niches YouTube<br />
-          <em>qui rapportent vraiment</em>
+          <span data-i18n="hero_line1">YouTube niches</span><br />
+          <em data-i18n="hero_line2">that actually pay</em>
         </h1>
-        <p class="hero-sub">
-          Où est l’argent dans ta niche, qui le prend, et quoi publier les 4 prochaines semaines.
+        <p class="hero-sub" data-i18n="hero_sub">
+          Where the money is in your niche, who takes it, and what to publish for the next 4 weeks.
         </p>
         <div class="hero-cta">
-          <a class="btn-hero primary" id="cta-calendly" href="#offres">Réserver un audit</a>
-          <a class="btn-hero ghost" href="app.html">Lancer le studio</a>
+          <a class="btn-hero primary" id="cta-calendly" href="#offres" data-i18n="cta_book">Book an audit</a>
+          <a class="btn-hero ghost" href="app.html" data-i18n="cta_studio">Launch the studio</a>
         </div>
       </div>
     </section>
 
     <section class="offers" id="offres">
-      <h2>Deux façons de démarrer</h2>
-      <p class="offers-lead">Un livrable clair. Pas de blabla dashboard.</p>
+      <h2 data-i18n="offers_h2">Two ways to start</h2>
+      <p class="offers-lead" data-i18n="offers_lead">A clear deliverable. No dashboard fluff.</p>
       <div class="offer-rows">
         <article class="offer">
-          <h3 id="offer-flash">Audit Flash — 48–72h</h3>
-          <p>1 niche · 2 concurrents · 8 titres · calendrier 2 semaines · PDF branded</p>
-          <a class="offer-link" id="cta-flash" href="#offres">Réserver le Flash →</a>
+          <h3 id="offer-flash" data-i18n="offer_flash_title">Flash Audit — 48–72h</h3>
+          <p data-i18n="offer_flash_body">1 niche · 2 competitors · 8 titles · 2-week calendar · branded PDF</p>
+          <a class="offer-link" id="cta-flash" href="#offres" data-i18n="offer_flash_cta">Book Flash →</a>
         </article>
         <article class="offer offer-accent">
-          <h3 id="offer-studio">Audit Studio — plan 4 semaines</h3>
-          <p>3 niches cash · compare chaînes · outliers · plan éditorial + briefs thumbs · call stratégie</p>
-          <a class="offer-link" id="cta-studio" href="#offres">Réserver le Studio →</a>
+          <h3 id="offer-studio" data-i18n="offer_studio_title">Studio Audit — 4-week plan</h3>
+          <p data-i18n="offer_studio_body">3 cash niches · channel compare · outliers · editorial plan + thumb briefs · strategy call</p>
+          <a class="offer-link" id="cta-studio" href="#offres" data-i18n="offer_studio_cta">Book Studio →</a>
         </article>
       </div>
     </section>
 
     <section class="proof" id="methode">
-      <h2>Ce que tu reçois</h2>
+      <h2 data-i18n="proof_h2">What you get</h2>
       <ul class="proof-list">
-        <li><strong>Cash Score</strong> — niches classées par potentiel monétaire (RPM × demande × facilité)</li>
-        <li><strong>Profils chaînes</strong> — estimation AdSense, outliers, efficacité $</li>
-        <li><strong>Plan éditorial</strong> — titres + briefs thumbnails prêts à tourner</li>
-        <li><strong>PDF imprimable</strong> — à forwarder à ton équipe ou ton client</li>
+        <li data-i18n-html="proof_1"><strong>Cash Score</strong> — niches ranked by money potential (RPM × demand × ease)</li>
+        <li data-i18n-html="proof_2"><strong>Channel profiles</strong> — AdSense estimate, outliers, money efficiency</li>
+        <li data-i18n-html="proof_3"><strong>Editorial plan</strong> — titles + thumbnail briefs ready to shoot</li>
+        <li data-i18n-html="proof_4"><strong>Printable PDF</strong> — forward to your team or client</li>
       </ul>
     </section>
 
     <section class="close" id="contact">
-      <h2>Prêt à voir où est l’argent ?</h2>
-      <p class="close-sub" id="close-tagline">Audits YouTube qui monétisent</p>
+      <h2 data-i18n="close_h2">Ready to see where the money is?</h2>
+      <p class="close-sub" id="close-tagline" data-i18n="close_tagline">YouTube audits that monetize</p>
       <div class="hero-cta">
-        <a class="btn-hero primary" id="cta-calendly-2" href="#offres">Booker sur Calendly</a>
-        <a class="btn-hero ghost" id="cta-email" href="mailto:">Écrire un email</a>
+        <a class="btn-hero primary" id="cta-calendly-2" href="#offres" data-i18n="cta_calendly">Book on Calendly</a>
+        <a class="btn-hero ghost" id="cta-email" href="mailto:" data-i18n="cta_email">Send an email</a>
       </div>
       <p class="close-meta" id="analyst-line"></p>
     </section>
@@ -87,7 +88,7 @@
 
   <footer class="land-foot">
     <span id="foot-brand">NicheScope</span>
-    <a href="app.html">App studio</a>
+    <a href="app.html" data-i18n="foot_app">Studio app</a>
     <a href="https://github.com/fredericnjoh-lab/nichescope" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
