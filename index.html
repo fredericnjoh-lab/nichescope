@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NicheScope Studio — Niches YouTube qui monétisent</title>
+  <meta name="description" content="Identifie les niches et chaînes YouTube qui rapportent de l'argent. Cash Score, RPM par verticale, pipeline Studio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='80' font-size='80'%3E%F0%9F%92%B0%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">NS</span>
+      <div class="brand-text">
+        <h1>NicheScope</h1>
+        <span class="tagline" data-i18n="tagline">Trouve les niches YouTube qui rapportent</span>
+      </div>
+    </div>
+    <div class="key-area">
+      <button type="button" id="favBtn" class="btn-icon" data-i18n-aria="fav" data-i18n-title="fav" aria-label="Favoris">
+        ★<span id="fav-count" class="badge" hidden></span>
+      </button>
+      <button type="button" id="historyBtn" class="btn-icon" data-i18n-aria="history" data-i18n-title="history" aria-label="Historique">⏱</button>
+      <button type="button" id="themeBtn" class="btn-icon" data-i18n-aria="theme" data-i18n-title="theme" aria-label="Thème">☾</button>
+      <button type="button" id="langBtn" class="btn-icon lang-btn" data-i18n="lang" title="Language">EN</button>
+      <input type="password" id="apiKey" placeholder="YouTube Data API key" autocomplete="off" aria-label="API key" />
+      <button type="button" id="saveKey" class="btn-secondary" data-i18n="save">Sauver</button>
+      <button type="button" id="helpKey" class="btn-link" title="API key" aria-label="Aide clé API">?</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" class="tab active" data-tab="studio" role="tab" aria-selected="true" data-i18n="tab_studio">Studio Cash</button>
+    <button type="button" class="tab" data-tab="niche" role="tab" aria-selected="false" data-i18n="tab_niche">Niches</button>
+    <button type="button" class="tab" data-tab="trending" role="tab" aria-selected="false" data-i18n="tab_trending">Tendances</button>
+    <button type="button" class="tab" data-tab="channel" role="tab" aria-selected="false" data-i18n="tab_channel">Chaînes</button>
+    <button type="button" class="tab" data-tab="keyword" role="tab" aria-selected="false" data-i18n="tab_keyword">Mots-clés</button>
+    <button type="button" class="tab" data-tab="outliers" role="tab" aria-selected="false" data-i18n="tab_outliers">Outliers</button>
+  </nav>
+
+  <main id="main">
+    <!-- STUDIO CASH -->
+    <section class="panel active" id="panel-studio" role="tabpanel">
+      <div class="panel-head studio-hero">
+        <h2 data-i18n="studio_h2">Ton studio YouTube — niches qui monétisent</h2>
+        <p data-i18n="studio_p">Identifie les sous-niches et chaînes qui génèrent de l’argent (AdSense + affilié), classe-les par Cash Score, et construis ton pipeline.</p>
+      </div>
+      <form class="form-row" id="form-studio">
+        <input type="text" id="studio-query" data-i18n-placeholder="studio_placeholder" placeholder="ex. finance perso, outils IA…" required />
+        <select id="studio-region" aria-label="Région">
+          <option value="FR" selected>France</option>
+          <option value="">Monde</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="BE">Belgique</option>
+          <option value="CH">Suisse</option>
+          <option value="DE">Germany</option>
+          <option value="IN">India</option>
+        </select>
+        <select id="studio-min-cash" aria-label="Cash min" hidden>
+          <option value="0" selected>0+</option>
+          <option value="40">40+</option>
+          <option value="55">55+</option>
+          <option value="70">70+</option>
+        </select>
+        <input type="checkbox" id="studio-affiliate" hidden />
+        <select id="studio-sort" hidden>
+          <option value="cash" selected>cash</option>
+          <option value="opp">opp</option>
+          <option value="views">views</option>
+        </select>
+        <button type="submit" class="btn-primary" data-i18n="studio_go">Scanner l’argent</button>
+      </form>
+      <div class="presets-row">
+        <span class="presets-label" data-i18n="studio_presets">Verticales cash</span>
+        <div id="studio-presets" class="presets"></div>
+      </div>
+      <aside class="pipeline-box" aria-label="Pipeline">
+        <h3 data-i18n="studio_pipeline">Mon pipeline Studio</h3>
+        <div id="studio-pipeline"></div>
+      </aside>
+
+      <aside class="audit-box" aria-label="Client audit">
+        <h3 data-i18n="audit_h3">Rapport d’audit client</h3>
+        <p class="plan-desc" data-i18n="audit_desc">Génère un rapport imprimable (PDF) pour un prospect : niches cash, chaînes, outliers, calendrier, briefs.</p>
+        <form class="form-row plan-form" id="form-audit">
+          <input type="text" id="audit-client" data-i18n-placeholder="audit_client_ph" placeholder="Nom du prospect / marque" />
+          <input type="text" id="audit-niche" data-i18n-placeholder="audit_niche_ph" placeholder="Niche focus (ou laisse le scan Studio)" />
+          <input type="text" id="audit-channel" data-i18n-placeholder="audit_channel_ph" placeholder="@chaîne (optionnel, max 2)" />
+          <select id="audit-region" aria-label="Région">
+            <option value="FR" selected>France</option>
+            <option value="US">United States</option>
+            <option value="">Monde</option>
+            <option value="BE">Belgique</option>
+            <option value="CH">Suisse</option>
+            <option value="CA">Canada</option>
+          </select>
+          <button type="submit" class="btn-primary" data-i18n="audit_go">Générer l’audit PDF</button>
+        </form>
+        <div id="audit-results" class="results plan-results"></div>
+      </aside>
+
+      <aside class="plan-box" aria-label="Editorial plan">
+        <h3 data-i18n="plan_h3">Plan éditorial</h3>
+        <p class="plan-desc" data-i18n="plan_desc">Génère un calendrier + briefs titres/thumbnails à partir des outliers des chaînes de ton pipeline.</p>
+        <form class="form-row plan-form" id="form-plan">
+          <select id="plan-cadence" aria-label="Cadence">
+            <option value="2" data-i18n="plan_cadence_2">2 / semaine</option>
+            <option value="3" selected data-i18n="plan_cadence_3">3 / semaine</option>
+            <option value="4" data-i18n="plan_cadence_4">4 / semaine</option>
+            <option value="5" data-i18n="plan_cadence_5">5 / semaine</option>
+          </select>
+          <select id="plan-weeks" aria-label="Horizon">
+            <option value="2" data-i18n="plan_weeks_2">2 semaines</option>
+            <option value="4" selected data-i18n="plan_weeks_4">4 semaines</option>
+            <option value="6" data-i18n="plan_weeks_6">6 semaines</option>
+          </select>
+          <button type="submit" class="btn-primary" data-i18n="plan_go">Générer le plan</button>
+        </form>
+        <div id="studio-plan-results" class="results plan-results"></div>
+      </aside>
+
+      <div id="studio-results" class="results"></div>
+    </section>
+
+    <!-- NICHE -->
+    <section class="panel" id="panel-niche" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="niche_h2">Sous-niches dans un sujet</h2>
+        <p data-i18n="niche_p">Entre un sujet large. On extrait les sous-niches et on les score (opportunité + cash).</p>
+      </div>
+      <form class="form-row" id="form-niche">
+        <input type="text" id="niche-query" data-i18n-placeholder="niche_placeholder" required />
+        <select id="niche-region">
+          <option value="FR" selected>France</option>
+          <option value="">Monde</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="DE">Germany</option>
+          <option value="IN">India</option>
+          <option value="BR">Brazil</option>
+        </select>
+        <button type="submit" class="btn-primary" data-i18n="niche_go">Découvrir</button>
+      </form>
+      <div id="niche-results" class="results"></div>
+    </section>
+
+    <!-- TRENDING -->
+    <section class="panel" id="panel-trending" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="trending_h2">Tendances maintenant</h2>
+        <p data-i18n="trending_p">Les vidéos qui montent le plus vite (vues / jour) sur une période.</p>
+      </div>
+      <form class="form-row" id="form-trending">
+        <input type="text" id="trending-query" data-i18n-placeholder="trending_placeholder" />
+        <select id="trending-window">
+          <option value="1">24h</option>
+          <option value="7" selected>7 jours</option>
+          <option value="30">30 jours</option>
+          <option value="90">90 jours</option>
+        </select>
+        <select id="trending-region">
+          <option value="FR" selected>France</option>
+          <option value="US">United States</option>
+          <option value="">Monde</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+          <option value="DE">Germany</option>
+        </select>
+        <select id="trending-format">
+          <option value="all" data-i18n="format_all">Tous formats</option>
+          <option value="long" data-i18n="format_long">Long-form</option>
+          <option value="shorts" data-i18n="format_shorts">Shorts</option>
+        </select>
+        <button type="submit" class="btn-primary" data-i18n="trending_go">Trouver</button>
+      </form>
+      <div id="trending-results" class="results"></div>
+    </section>
+
+    <!-- CHANNEL -->
+    <section class="panel" id="panel-channel" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="channel_h2">Analyse & comparaison de chaînes</h2>
+        <p data-i18n="channel_p">Une chaîne pour le détail, ou jusqu’à 3 séparées par des virgules pour comparer revenus estimés.</p>
+      </div>
+      <form class="form-row" id="form-channel">
+        <input type="text" id="channel-input" data-i18n-placeholder="channel_placeholder" required />
+        <select id="channel-format">
+          <option value="all" data-i18n="format_all">Tous formats</option>
+          <option value="long" data-i18n="format_long">Long-form</option>
+          <option value="shorts" data-i18n="format_shorts">Shorts</option>
+        </select>
+        <button type="submit" class="btn-primary" data-i18n="channel_go">Analyser</button>
+      </form>
+      <div id="channel-results" class="results"></div>
+    </section>
+
+    <!-- KEYWORD -->
+    <section class="panel" id="panel-keyword" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="keyword_h2">Recherche de mots-clés</h2>
+        <p data-i18n="keyword_p">Difficulté, top 10, opportunités petites chaînes, et score cash du mot-clé.</p>
+      </div>
+      <form class="form-row" id="form-keyword">
+        <input type="text" id="keyword-query" data-i18n-placeholder="keyword_placeholder" required />
+        <button type="submit" class="btn-primary" data-i18n="keyword_go">Analyser</button>
+      </form>
+      <div id="keyword-results" class="results"></div>
+    </section>
+
+    <!-- OUTLIERS -->
+    <section class="panel" id="panel-outliers" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="outliers_h2">Vidéos outliers</h2>
+        <p data-i18n="outliers_p">Les uploads qui ont explosé vs la médiane de la chaîne — ce qui marche vraiment.</p>
+      </div>
+      <form class="form-row" id="form-outliers">
+        <input type="text" id="outliers-input" data-i18n-placeholder="outliers_placeholder" required />
+        <select id="outliers-threshold">
+          <option value="2">≥ 2×</option>
+          <option value="3" selected>≥ 3×</option>
+          <option value="5">≥ 5×</option>
+          <option value="10">≥ 10×</option>
+        </select>
+        <select id="outliers-format">
+          <option value="all" data-i18n="format_all">Tous formats</option>
+          <option value="long" data-i18n="format_long">Long-form</option>
+          <option value="shorts" data-i18n="format_shorts">Shorts</option>
+        </select>
+        <button type="submit" class="btn-primary" data-i18n="outliers_go">Trouver</button>
+      </form>
+      <div id="outliers-results" class="results"></div>
+    </section>
+  </main>
+
+  <footer>
+    <span id="quota-info"><span data-i18n="quota">Quota aujourd’hui</span>: <b id="quota-count">0</b> / 10,000</span>
+    <span class="footer-spacer"></span>
+    <span>
+      <a href="#" id="clear-cache" data-i18n="clear_cache">Vider le cache</a> ·
+      <a href="#" id="reset-quota" data-i18n="reset_quota">Reset compteur</a> ·
+      <span data-i18n="key_stays">Ta clé reste dans ton navigateur</span>
+    </span>
+  </footer>
+
+  <div class="popover" id="history-pop" role="dialog" aria-label="History">
+    <div class="popover-head">
+      <h4 data-i18n="history">Historique</h4>
+      <button type="button" class="btn-link" id="closeHistory" aria-label="Close">×</button>
+    </div>
+    <div id="history-list" class="history-list"></div>
+  </div>
+
+  <div class="modal" id="modal-help" role="dialog" aria-modal="true" aria-labelledby="onboard-title" aria-hidden="true">
+    <div class="modal-card onboard">
+      <p class="onboard-kicker">NicheScope Studio</p>
+      <h3 id="onboard-title" data-i18n="onboarding_title">Bienvenue dans NicheScope Studio</h3>
+      <ul class="onboard-steps">
+        <li data-i18n="onboarding_step1">1. Crée une clé API gratuite</li>
+        <li data-i18n="onboarding_step2">2. Colle-la en haut et clique Sauver</li>
+        <li data-i18n="onboarding_step3">3. Ouvre Studio Cash pour trouver des niches qui rapportent</li>
+      </ul>
+      <ol>
+        <li data-i18n="onboarding_ol1">Va sur Google Cloud Console et crée un projet.</li>
+        <li data-i18n="onboarding_ol2">APIs &amp; Services → Bibliothèque → YouTube Data API v3 → Activer.</li>
+        <li data-i18n="onboarding_ol3">Identifiants → Créer des identifiants → Clé API.</li>
+        <li data-i18n="onboarding_ol4">Colle la clé en haut de NicheScope → Sauver.</li>
+      </ol>
+      <p class="muted" data-i18n="onboarding_note">10 000 unités/jour gratuites. Une recherche = 100. Chaîne/vidéo = 1. Cache local pour économiser.</p>
+      <p><a href="https://console.cloud.google.com/" target="_blank" rel="noopener">console.cloud.google.com ↗</a></p>
+      <div class="onboard-actions">
+        <button type="button" class="btn-primary" id="closeHelp" data-i18n="onboarding_cta">J’ai ma clé — c’est parti</button>
+        <button type="button" class="btn-secondary" id="onboardLater" data-i18n="onboarding_later">Plus tard</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

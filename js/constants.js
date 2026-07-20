@@ -1,0 +1,9 @@
+export const CACHE_PREFIX = "nschost:";
+export const KEY_STORAGE = "nschost:apikey";
+export const QUOTA_KEY = "nschost:quota";
+export const HISTORY_KEY = "nschost:history";
+export const THEME_KEY = "nschost:theme";
+export const LANG_KEY = "nschost:lang";
+export const FAV_KEY = "nschost:favorites";
+export const ONBOARD_KEY = "nschost:onboarded";
+export const QUOTA_DAILY_LIMIT = 10000;
