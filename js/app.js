@@ -21,6 +21,37 @@ import { onChannel } from "./features/channel.js";
 import { onKeyword } from "./features/keyword.js";
 import { onOutliers } from "./features/outliers.js";
 import { getFavorites } from "./favorites.js";
+import { getBrand, saveBrand } from "./brand.js";
+
+function applyAppBrand() {
+  const b = getBrand();
+  if ($("#app-brand-mark")) $("#app-brand-mark").textContent = b.mark || "NS";
+  if ($("#app-brand-name")) $("#app-brand-name").textContent = b.name || "NicheScope";
+}
+
+function fillBrandForm() {
+  const b = getBrand();
+  const set = (id, v) => { const el = $(id); if (el) el.value = v || ""; };
+  set("#brand-name", b.name);
+  set("#brand-mark", b.mark);
+  set("#brand-tagline", b.tagline);
+  set("#brand-analyst", b.analystName);
+  set("#brand-email", b.email);
+  set("#brand-phone", b.phone);
+  set("#brand-calendly", b.calendlyUrl);
+  set("#brand-website", b.website);
+}
+
+function openBrandModal() {
+  fillBrandForm();
+  $("#modal-brand")?.classList.add("show");
+  $("#modal-brand")?.setAttribute("aria-hidden", "false");
+}
+
+function closeBrandModal() {
+  $("#modal-brand")?.classList.remove("show");
+  $("#modal-brand")?.setAttribute("aria-hidden", "true");
+}
 
 function replaySearch(tab, query) {
   switchTab(tab);
@@ -63,6 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadLang();
   applyI18n();
   loadKey();
+  applyAppBrand();
   applyTheme(localStorage.getItem(THEME_KEY) || "dark");
   updateQuotaUI();
   wireTabs();
@@ -75,6 +107,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   $("#apiKey")?.addEventListener("keydown", e => {
     if (e.key === "Enter" && saveKey()) flashSaved();
+  });
+
+  $("#brandBtn")?.addEventListener("click", openBrandModal);
+  $("#closeBrand")?.addEventListener("click", closeBrandModal);
+  $("#modal-brand")?.addEventListener("click", (e) => {
+    if (e.target.id === "modal-brand") closeBrandModal();
+  });
+  $("#form-brand")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    saveBrand({
+      name: $("#brand-name")?.value.trim(),
+      mark: ($("#brand-mark")?.value.trim() || "NS").slice(0, 3).toUpperCase(),
+      tagline: $("#brand-tagline")?.value.trim(),
+      analystName: $("#brand-analyst")?.value.trim(),
+      email: $("#brand-email")?.value.trim(),
+      phone: $("#brand-phone")?.value.trim(),
+      calendlyUrl: $("#brand-calendly")?.value.trim(),
+      website: $("#brand-website")?.value.trim(),
+    });
+    applyAppBrand();
+    closeBrandModal();
+    alert(getLang() === "en" ? "Branding saved — also updates the landing & PDF reports." : "Branding sauvé — landing & rapports PDF mis à jour.");
   });
 
   $("#themeBtn")?.addEventListener("click", toggleTheme);

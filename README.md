@@ -27,16 +27,24 @@ Les chiffres AdSense sont des **ordres de grandeur** (benchmarks industrie), pas
 
 Aussi : i18n **FR/EN**, thème clair/sombre, historique, favoris, cache TTL par endpoint, export CSV/JSON, onboarding clé API.
 
-## Lancer en local
+## Live
 
-Ouvre `index.html` ou :
+- Landing : https://fredericnjoh-lab.github.io/nichescope/
+- App studio : https://fredericnjoh-lab.github.io/nichescope/app.html
+
+## Lancer en local
 
 ```bash
 python3 -m http.server 8080
-# → http://localhost:8080
+# → http://localhost:8080/          (landing)
+# → http://localhost:8080/app.html  (studio)
 ```
 
 (Les modules ES nécessitent un serveur HTTP — pas de `file://`.)
+
+### Branding + Calendly
+
+Dans l’app → **⚙** : nom, email, URL Calendly. Appliqué à la landing et aux PDF d’audit.
 
 ## Tests
 

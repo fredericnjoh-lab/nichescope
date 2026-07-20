@@ -14,6 +14,7 @@ import { discoverNiches } from "./discover.js";
 import { scoreChannelMoney } from "../money.js";
 import { buildStudioPlan } from "../editorial.js";
 import { getStudioSnapshot, getLastPlan } from "../session.js";
+import { getBrand, calendlyHref, mailtoHref } from "../brand.js";
 
 const DISCLAIMER_FR =
   "Estimations AdSense / RPM basées sur des benchmarks industrie et des proxies YouTube Data API. Ce ne sont pas des revenus réels. À utiliser comme aide à la décision, pas comme garantie financière.";
@@ -161,17 +162,30 @@ function reportStyles() {
     .actions { position:sticky; top:0; background:rgba(255,255,255,.95); border-bottom:1px solid #e2e6ef; padding:10px 28px; display:flex; gap:8px; z-index:5; }
     .actions button { font-family:inherit; cursor:pointer; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; border:1px solid #d5dae6; background:#fff; }
     .actions .primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+    .brand-bar { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+    .brand-mark { width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#e11d37,#8b1020); color:#fff; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; }
+    .brand-name { font-family:Georgia,"Instrument Serif",serif; font-size:22px; margin:0; }
+    .brand-tag { font-size:12px; color:#5c6478; margin:2px 0 0; }
+    .cta-box { margin-top:28px; padding:18px 20px; background:#12151c; color:#fff; border-radius:12px; }
+    .cta-box h3 { margin:0 0 6px; font-family:Georgia,serif; font-size:22px; font-weight:400; color:#fff; }
+    .cta-box p { margin:0 0 12px; color:#9aa3b5; font-size:13px; }
+    .cta-btn { display:inline-block; background:#e11d37; color:#fff !important; text-decoration:none; padding:10px 16px; border-radius:8px; font-weight:600; font-size:13px; margin-right:8px; }
+    .cta-btn.ghost { background:transparent; border:1px solid rgba(255,255,255,.3); }
     footer { margin-top:24px; font-size:11px; color:#8b93a7; }
     @media print {
       .actions { display:none !important; }
       .sheet { padding:12px 0; max-width:100%; }
       body { background:#fff; }
-      .card, .disclaimer { break-inside: avoid; }
+      .card, .disclaimer, .cta-box { break-inside: avoid; }
+      .cta-box { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     }
   `;
 }
 
 function buildReportHtml(data) {
+  const brand = getBrand();
+  const cal = calendlyHref(brand);
+  const mail = mailtoHref(brand);
   const L = data.lang === "en";
   const dateStr = new Date(data.generatedAt).toLocaleDateString(L ? "en-GB" : "fr-FR", {
     year: "numeric", month: "long", day: "numeric",
@@ -240,12 +254,23 @@ function buildReportHtml(data) {
         "Option : retainer pour refresh outliers + scripts chaque semaine.",
       ];
 
+  const preparedBy = [brand.analystName, brand.email].filter(Boolean).join(" · ");
+  const ctaBlock = (cal || mail) ? `
+    <div class="cta-box">
+      <h3>${L ? "Next step" : "Prochaine étape"}</h3>
+      <p>${L
+        ? "Book a strategy call to turn this plan into a 4-week publishing sprint."
+        : "Réserve un call stratégie pour transformer ce plan en sprint de publication de 4 semaines."}</p>
+      ${cal ? `<a class="cta-btn" href="${escapeHtml(cal)}">${L ? "Book on Calendly" : "Réserver sur Calendly"}</a>` : ""}
+      ${mail ? `<a class="cta-btn ghost" href="${escapeHtml(mail)}">${L ? "Email me" : "M’écrire"}</a>` : ""}
+    </div>` : "";
+
   return `<!doctype html>
 <html lang="${data.lang}">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>NicheScope Audit — ${escapeHtml(data.clientName)}</title>
+  <title>${escapeHtml(brand.name)} Audit — ${escapeHtml(data.clientName)}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Instrument+Serif&display=swap" rel="stylesheet" />
   <style>${reportStyles()}</style>
@@ -253,11 +278,19 @@ function buildReportHtml(data) {
 <body>
   <div class="actions">
     <button type="button" class="primary" onclick="window.print()">${L ? "Print / Save PDF" : "Imprimer / Sauver PDF"}</button>
+    ${cal ? `<a class="cta-btn" href="${escapeHtml(cal)}" target="_blank" rel="noopener" style="line-height:1.2;padding:10px 14px;">Calendly</a>` : ""}
     <button type="button" onclick="window.close()">${L ? "Close" : "Fermer"}</button>
   </div>
   <div class="sheet">
+    <div class="brand-bar">
+      <div class="brand-mark">${escapeHtml(brand.mark || "NS")}</div>
+      <div>
+        <p class="brand-name">${escapeHtml(brand.name || "NicheScope")}</p>
+        <p class="brand-tag">${escapeHtml(brand.tagline || "")}${preparedBy ? " · " + escapeHtml(preparedBy) : ""}</p>
+      </div>
+    </div>
     <header class="cover">
-      <p class="kicker">NicheScope Studio · ${L ? "YouTube Monetization Audit" : "Audit monétisation YouTube"}</p>
+      <p class="kicker">${escapeHtml(brand.name)} · ${L ? "YouTube Monetization Audit" : "Audit monétisation YouTube"}</p>
       <h1>${escapeHtml(data.clientName)}</h1>
       <p class="meta">
         ${L ? "Focus" : "Focus"}: <b>${escapeHtml(data.topic)}</b>
@@ -322,8 +355,14 @@ function buildReportHtml(data) {
     <h2>6. ${L ? "Recommended next steps" : "Prochaines étapes"}</h2>
     <ul class="list">${nextSteps.map(s => `<li>${escapeHtml(s)}</li>`).join("")}</ul>
 
+    ${ctaBlock}
+
     <div class="disclaimer">${escapeHtml(data.disclaimer)}</div>
-    <footer>NicheScope Studio · nichescope · ${escapeHtml(data.generatedAt)}</footer>
+    <footer>
+      ${escapeHtml(brand.name)} · ${escapeHtml(brand.website || "")}
+      ${preparedBy ? " · " + escapeHtml(preparedBy) : ""}
+      · ${escapeHtml(data.generatedAt)}
+    </footer>
   </div>
 </body>
 </html>`;

@@ -6,4 +6,5 @@ export const THEME_KEY = "nschost:theme";
 export const LANG_KEY = "nschost:lang";
 export const FAV_KEY = "nschost:favorites";
 export const ONBOARD_KEY = "nschost:onboarded";
+export const BRAND_KEY = "nschost:brand";
 export const QUOTA_DAILY_LIMIT = 10000;

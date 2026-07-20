@@ -4,11 +4,11 @@ import { $, hydrateVideos } from "./utils.js";
 import { t } from "./i18n.js";
 import {
   CACHE_PREFIX, KEY_STORAGE, QUOTA_KEY, QUOTA_DAILY_LIMIT,
-  HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY,
+  HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY, BRAND_KEY,
 } from "./constants.js";
 
 export {
-  KEY_STORAGE, QUOTA_KEY, HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY, QUOTA_DAILY_LIMIT,
+  KEY_STORAGE, QUOTA_KEY, HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY, BRAND_KEY, QUOTA_DAILY_LIMIT,
 };
 
 const API_BASE = "https://www.googleapis.com/youtube/v3";
@@ -66,7 +66,7 @@ function cacheSet(key, value) {
 }
 
 export function clearCache() {
-  const keep = new Set([KEY_STORAGE, QUOTA_KEY, HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY]);
+  const keep = new Set([KEY_STORAGE, QUOTA_KEY, HISTORY_KEY, THEME_KEY, LANG_KEY, FAV_KEY, ONBOARD_KEY, BRAND_KEY]);
   Object.keys(localStorage)
     .filter(k => k.startsWith(CACHE_PREFIX) && !keep.has(k))
     .forEach(k => localStorage.removeItem(k));
