@@ -1144,6 +1144,37 @@ footer {
   .seo-split { grid-template-columns: 1fr; }
 }
 
+.hidden { display: none !important; }
+
+/* Rankings (Supabase) */
+.rk-setup {
+  max-width: 520px;
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+  margin-bottom: 20px;
+}
+.rk-setup h3 { margin: 0 0 6px; font-size: 16px; }
+.rk-list { display: flex; flex-direction: column; gap: 12px; }
+.rk-spark {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 32px;
+  margin: 8px 0;
+}
+.rk-bar {
+  width: 6px;
+  background: var(--accent);
+  border-radius: 2px 2px 0 0;
+  opacity: 0.75;
+}
+.rk-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.rk-delta { font-size: 12px; font-weight: 700; }
+.rk-delta.up { color: var(--good); }
+.rk-delta.down { color: var(--accent); }
+
 /* Daily ideas / topic tracker */
 .ideas-grid {
   display: grid;

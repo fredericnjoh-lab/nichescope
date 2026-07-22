@@ -24,6 +24,9 @@ Les chiffres AdSense sont des **ordres de grandeur** (benchmarks industrie), pas
 | Chaînes | Stats, AdSense estimé, compare jusqu’à 3 |
 | Mots-clés | Difficulté + overall score + cash |
 | **Optimize** | SEO score, tags, titres, desc, audit vidéo (style vidIQ) |
+| **Scorecard** | Comparaison concurrents (jusqu’à 4) |
+| **Idées** | Daily ideas + topic tracker local |
+| **Rankings** | Historique keywords (Supabase, optionnel) |
 | Outliers | Vidéos breakout d’une chaîne |
 
 Aussi : i18n **FR/EN**, thème clair/sombre, historique, favoris, cache TTL par endpoint, export CSV/JSON, onboarding clé API.
@@ -68,22 +71,44 @@ npm test
 vercel --prod
 ```
 
-Pas de backend, pas de variables d’env.
+Front 100 % statique. Backend rankings = Supabase (optionnel).
+
+## Supabase (P3 Rankings)
+
+1. Crée un projet sur [supabase.com](https://supabase.com)
+2. **Authentication → Providers → Anonymous** → Enable
+3. Installe le CLI puis lie le projet :
+
+```bash
+npx supabase login
+npx supabase link --project-ref <ton-ref>
+npx supabase db push
+npx supabase functions deploy scan-keyword
+```
+
+4. Dans l’app → onglet **Rankings** → colle **Project URL** + **anon key** (Settings → API)
+5. Ta clé YouTube reste dans le navigateur ; elle est envoyée à la Edge Function via `x-youtube-key` (quota utilisateur)
+
+Tables : `tracked_keywords`, `ranking_snapshots` (RLS par `auth.uid()`).
+
+Cron optionnel (Dashboard → Edge Functions → Schedules) pour rescanner périodiquement.
 
 ## Architecture
 
 ```
-index.html          UI + onglets
-style.css           Thème + Studio
+app.html / index.html   UI
 js/
-  app.js            Entry
-  money.js          Moteur Cash / RPM
-  api.js            YouTube + cache + quota
-  i18n.js           FR / EN
-  features/         studio, niche, channel…
-tests/money.test.js
+  app.js                Entry
+  backend.js            Client Supabase (rankings)
+  money.js / seo.js …   Moteurs purs
+  features/             Onglets
+supabase/
+  migrations/           Schéma rankings + RLS
+  functions/scan-keyword/
+tests/
 ```
 
 ## Privacy
 
-Clé API dans `localStorage` uniquement. Aucun analytics. Appels uniquement vers l’API YouTube.
+Clés (YouTube + Supabase anon) dans `localStorage`. Aucun analytics tiers.  
+Sans Supabase configuré, l’app reste 100 % navigateur → API YouTube.

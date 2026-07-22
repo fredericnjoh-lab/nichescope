@@ -46,6 +46,7 @@
     <button type="button" class="tab" data-tab="optimize" role="tab" aria-selected="false" data-i18n="tab_optimize">Optimize</button>
     <button type="button" class="tab" data-tab="scorecard" role="tab" aria-selected="false" data-i18n="tab_scorecard">Scorecard</button>
     <button type="button" class="tab" data-tab="ideas" role="tab" aria-selected="false" data-i18n="tab_ideas">Idées</button>
+    <button type="button" class="tab" data-tab="rankings" role="tab" aria-selected="false" data-i18n="tab_rankings">Rankings</button>
     <button type="button" class="tab" data-tab="outliers" role="tab" aria-selected="false" data-i18n="tab_outliers">Outliers</button>
   </nav>
 
@@ -268,6 +269,43 @@
           </form>
           <div id="seo-video-results" class="results"></div>
         </div>
+      </div>
+    </section>
+
+    <!-- RANKINGS (Supabase) -->
+    <section class="panel" id="panel-rankings" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="rk_h2">Rankings — historique keywords</h2>
+        <p data-i18n="rk_p">Suis des mots-clés dans le temps (Supabase). Proxy scores, pas le volume propriétaire vidIQ.</p>
+      </div>
+
+      <div id="rankings-setup" class="rk-setup">
+        <h3 data-i18n="rk_setup_h3">Connecter Supabase</h3>
+        <p class="plan-desc" data-i18n="rk_setup_p">Colle l’URL projet + anon key. Active Anonymous sign-in dans Auth. Puis push la migration + deploy scan-keyword.</p>
+        <form id="form-rankings-setup" class="seo-form">
+          <label><span>Supabase URL</span>
+            <input type="url" id="sb-url" placeholder="https://xxxx.supabase.co" required />
+          </label>
+          <label><span>Anon key</span>
+            <input type="password" id="sb-anon" autocomplete="off" required />
+          </label>
+          <button type="submit" class="btn-primary" data-i18n="rk_connect">Connecter</button>
+        </form>
+        <p class="muted" style="font-size:12px;margin-top:10px;" data-i18n="rk_setup_docs">Voir README → section Supabase.</p>
+      </div>
+
+      <div id="rankings-main" class="hidden">
+        <form class="form-row" id="form-rankings">
+          <input type="text" id="rk-keyword" data-i18n-placeholder="rk_placeholder" placeholder="ex. personal finance tips" required />
+          <select id="rk-region" aria-label="Région">
+            <option value="">Monde</option>
+            <option value="FR" selected>France</option>
+            <option value="US">United States</option>
+            <option value="GB">United Kingdom</option>
+          </select>
+          <button type="submit" class="btn-primary" data-i18n="rk_track">Suivre + scanner</button>
+        </form>
+        <div id="rankings-list" class="results"></div>
       </div>
     </section>
 

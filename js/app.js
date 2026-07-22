@@ -23,6 +23,7 @@ import { onOutliers } from "./features/outliers.js";
 import { initOptimize, onOptimizeKeyword } from "./features/optimize.js";
 import { initScorecard, onScorecard } from "./features/scorecard.js";
 import { initIdeas, onIdeas } from "./features/ideas.js";
+import { initRankings } from "./features/rankings.js";
 import { getFavorites } from "./favorites.js";
 import { getBrand, saveBrand } from "./brand.js";
 
@@ -87,6 +88,9 @@ function replaySearch(tab, query) {
     $("#ideas-query").value = q === "(pipeline/popular)" ? "" : q;
     onIdeas({ preventDefault() {} });
   }
+  if (tab === "rankings" && query) {
+    $("#rk-keyword").value = query;
+  }
   if (tab === "outliers") {
     const q = query.split(" · ")[0];
     $("#outliers-input").value = q;
@@ -122,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initOptimize();
   initScorecard();
   initIdeas();
+  initRankings();
   renderPipeline();
 
   $("#saveKey")?.addEventListener("click", () => {

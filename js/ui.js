@@ -61,6 +61,7 @@ export function renderHistory(replaySearch) {
     optimize: t("tab_optimize"),
     scorecard: t("tab_scorecard"),
     ideas: t("tab_ideas"),
+    rankings: t("tab_rankings"),
     outliers: t("tab_outliers"),
   };
   $("#history-list").innerHTML = arr.map(h => `

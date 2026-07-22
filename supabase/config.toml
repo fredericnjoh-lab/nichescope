@@ -1,0 +1,18 @@
+# Generated for NicheScope — override via `supabase link`.
+# Docs: https://supabase.com/docs/guides/cli/config
+
+project_id = "nichescope"
+
+[api]
+enabled = true
+
+[db]
+major_version = 15
+
+[auth]
+enabled = true
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
