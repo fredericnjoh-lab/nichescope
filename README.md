@@ -91,7 +91,23 @@ npx supabase functions deploy scan-keyword
 
 Tables : `tracked_keywords`, `ranking_snapshots` (RLS par `auth.uid()`).
 
-Cron optionnel (Dashboard → Edge Functions → Schedules) pour rescanner périodiquement.
+### Cron quotidien
+
+```bash
+npx supabase functions deploy scan-daily
+npx supabase secrets set YOUTUBE_API_KEY=xxxxx
+npx supabase secrets set CRON_SECRET=$(openssl rand -hex 24)
+```
+
+Puis adapte et exécute `supabase/cron-setup.sql` dans le SQL Editor (06:00 UTC).
+
+### Extension Chrome
+
+```
+chrome://extensions → Developer mode → Load unpacked → dossier extension/
+```
+
+Panel SEO flottant sur YouTube watch / Studio. Détails : `extension/README.md`.
 
 ## Architecture
 

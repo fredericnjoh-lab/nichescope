@@ -1,0 +1,86 @@
+#nschost-seo-panel {
+  position: fixed;
+  top: 80px;
+  right: 16px;
+  z-index: 2147483646;
+  width: 300px;
+  max-height: calc(100vh - 100px);
+  overflow: auto;
+  background: #141414;
+  color: #f2f2f2;
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  font: 13px/1.4 "DM Sans", system-ui, sans-serif;
+}
+
+#nschost-seo-panel .ns-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+#nschost-seo-panel .ns-close {
+  background: transparent;
+  border: 0;
+  color: #aaa;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+#nschost-seo-panel .ns-body {
+  padding: 12px;
+}
+
+#nschost-seo-panel .ns-score {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+#nschost-seo-panel .ns-high { color: #3dd68c; }
+#nschost-seo-panel .ns-med { color: #e6b84d; }
+#nschost-seo-panel .ns-low { color: #e5484d; }
+
+#nschost-seo-panel .ns-meta {
+  color: #999;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+#nschost-seo-panel .ns-title {
+  font-weight: 600;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+#nschost-seo-panel .ns-checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#nschost-seo-panel .ns-checks li {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: #bbb;
+  font-size: 12px;
+}
+
+#nschost-seo-panel .ns-checks li.pass { color: #3dd68c; }
+#nschost-seo-panel .ns-checks li.fail { color: #888; }
+
+#nschost-seo-panel .ns-foot {
+  padding: 10px 12px;
+  border-top: 1px solid #2a2a2a;
+  font-size: 12px;
+}
+
+#nschost-seo-panel .ns-foot a {
+  color: #e5484d;
+  text-decoration: none;
+}
