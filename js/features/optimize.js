@@ -5,7 +5,7 @@ import {
   $, $$, escapeHtml, fmtNum, hydrateVideos, csvButton, downloadCSV,
 } from "../utils.js";
 import { t, getLang } from "../i18n.js";
-import { addHistory, setLoading, setError, setEmpty } from "../ui.js";
+import { addHistory, setLoading, setError, setEmpty, switchTab } from "../ui.js";
 import { tokenize, extractTopTerms } from "../clustering.js";
 import {
   scoreKeywordOverall,
@@ -16,6 +16,7 @@ import {
   generateDescription,
   parseVideoId,
 } from "../seo.js";
+import { isBackendConfigured, trackKeywordAndScan } from "../backend.js";
 
 async function fetchKeywordContext(query) {
   const search = await yt("search", {
@@ -75,7 +76,10 @@ function renderOptimizeKeyword(query, ctx) {
   $("#optimize-results").innerHTML = `
     <div class="results-head">
       <p><b>${escapeHtml(query)}</b> · ${escapeHtml(t("seo_overall"))}</p>
-      ${csvButton(csvRows, `nichescope-seo-${query.replace(/\W+/g, "_")}.csv`, t("export_csv"))}
+      <div class="export-group">
+        <button type="button" class="btn-primary" id="opt-track-rankings">${escapeHtml(t("rk_track_here"))}</button>
+        ${csvButton(csvRows, `nichescope-seo-${query.replace(/\W+/g, "_")}.csv`, t("export_csv"))}
+      </div>
     </div>
 
     <div class="seo-scoreboard">
@@ -148,6 +152,26 @@ function renderOptimizeKeyword(query, ctx) {
     <textarea class="seo-desc" id="seo-desc-out" rows="10" readonly>${escapeHtml(desc)}</textarea>
     <button type="button" class="btn-csv" id="copy-desc" style="margin-top:8px;">${escapeHtml(t("seo_copy_desc"))}</button>
   `;
+
+  $("#opt-track-rankings")?.addEventListener("click", async () => {
+    const btn = $("#opt-track-rankings");
+    if (!isBackendConfigured()) {
+      alert(t("rk_need_backend"));
+      switchTab("rankings");
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = t("loading");
+    try {
+      await trackKeywordAndScan(query, { lang: getLang() });
+      btn.textContent = t("rk_tracked_ok");
+      setTimeout(() => { btn.textContent = t("rk_track_here"); btn.disabled = false; }, 2000);
+    } catch (err) {
+      alert(err.message || String(err));
+      btn.textContent = t("rk_track_here");
+      btn.disabled = false;
+    }
+  });
 
   $$("#optimize-results .seo-related").forEach(el => {
     el.addEventListener("click", () => {

@@ -141,3 +141,18 @@ export async function scanTrackedKeyword(trackedKeywordId) {
   if (data?.error) throw new Error(data.error);
   return data;
 }
+
+/**
+ * One-shot: add keyword to Rankings + first scan.
+ * Used from Keywords / Optimize tabs.
+ */
+export async function trackKeywordAndScan(keyword, { region = "", lang = "fr" } = {}) {
+  if (!isBackendConfigured()) {
+    const err = new Error("backend_not_configured");
+    err.code = "backend_not_configured";
+    throw err;
+  }
+  const row = await addTrackedKeyword({ keyword, region, lang });
+  const scan = await scanTrackedKeyword(row.id);
+  return { row, scan };
+}

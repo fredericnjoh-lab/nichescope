@@ -1,10 +1,11 @@
 import { yt, ytVideos, ytChannels } from "../api.js";
 import { $, $$, escapeHtml, fmtNum, fmtDate, fmtMoney, hydrateVideos, parseISODuration, csvButton, scoreClass } from "../utils.js";
 import { t, verticalLabel, getLang } from "../i18n.js";
-import { addHistory, setLoading, setError, setEmpty } from "../ui.js";
+import { addHistory, setLoading, setError, setEmpty, switchTab } from "../ui.js";
 import { tokenize, extractTopTerms } from "../clustering.js";
 import { scoreCashNiche } from "../money.js";
 import { scoreKeywordOverall } from "../seo.js";
+import { isBackendConfigured, trackKeywordAndScan } from "../backend.js";
 
 export async function onKeyword(e) {
   e.preventDefault();
@@ -85,7 +86,10 @@ function renderKeyword(query, summary, top10, related) {
   $("#keyword-results").innerHTML = `
     <div class="results-head">
       <p><b>${escapeHtml(query)}</b></p>
-      ${csvButton(csvRows, `nichescope-keyword-${query.replace(/\W+/g, "_")}.csv`, t("export_csv"))}
+      <div class="export-group">
+        <button type="button" class="btn-primary" id="kw-track-rankings">${escapeHtml(t("rk_track_here"))}</button>
+        ${csvButton(csvRows, `nichescope-keyword-${query.replace(/\W+/g, "_")}.csv`, t("export_csv"))}
+      </div>
     </div>
     <div class="kw-summary">
       ${ks ? `<div class="stat-card highlight"><div class="stat-label">${escapeHtml(t("seo_overall"))}</div><div class="stat-value"><span class="score ${ks.overallBracket.cls}">${ks.overall}</span></div><div class="stat-sub">vol ${ks.volumeScore} · comp ${ks.competitionScore}</div></div>` : ""}
@@ -122,6 +126,26 @@ function renderKeyword(query, summary, top10, related) {
       $("#keyword-query").value = el.dataset.kw;
       $("#form-keyword").requestSubmit();
     });
+  });
+
+  $("#kw-track-rankings")?.addEventListener("click", async () => {
+    const btn = $("#kw-track-rankings");
+    if (!isBackendConfigured()) {
+      alert(t("rk_need_backend"));
+      switchTab("rankings");
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = t("loading");
+    try {
+      await trackKeywordAndScan(query, { lang: getLang() });
+      btn.textContent = t("rk_tracked_ok");
+      setTimeout(() => { btn.textContent = t("rk_track_here"); btn.disabled = false; }, 2000);
+    } catch (err) {
+      alert(err.message || String(err));
+      btn.textContent = t("rk_track_here");
+      btn.disabled = false;
+    }
   });
   void parseISODuration;
 }
