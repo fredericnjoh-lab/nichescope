@@ -4,6 +4,7 @@ import { t, verticalLabel, getLang } from "../i18n.js";
 import { addHistory, setLoading, setError, setEmpty } from "../ui.js";
 import { tokenize, extractTopTerms } from "../clustering.js";
 import { scoreCashNiche } from "../money.js";
+import { scoreKeywordOverall } from "../seo.js";
 
 export async function onKeyword(e) {
   e.preventDefault();
@@ -57,6 +58,7 @@ export async function onKeyword(e) {
       count: top10.length,
       titles: top10.map(v => v.title),
     });
+    const kwScore = scoreKeywordOverall({ totalResults, avgTopSubs, avgTopViews, smallChannels });
 
     const queryStems = tokenize(query);
     const related = extractTopTerms(videos.map(v => v.title), 16, videos.map(v => v.views))
@@ -64,7 +66,7 @@ export async function onKeyword(e) {
       .slice(0, 12);
 
     renderKeyword(query, {
-      totalResults, avgTopSubs, avgTopViews, smallChannels, difficulty, diffClass, money,
+      totalResults, avgTopSubs, avgTopViews, smallChannels, difficulty, diffClass, money, kwScore,
     }, top10, related);
   } catch (err) {
     setError("#keyword-results", err);
@@ -78,6 +80,7 @@ function renderKeyword(query, summary, top10, related) {
     published: v.publishedAt, url: `https://www.youtube.com/watch?v=${v.id}`,
   }));
   const m = summary.money;
+  const ks = summary.kwScore;
 
   $("#keyword-results").innerHTML = `
     <div class="results-head">
@@ -85,6 +88,7 @@ function renderKeyword(query, summary, top10, related) {
       ${csvButton(csvRows, `nichescope-keyword-${query.replace(/\W+/g, "_")}.csv`, t("export_csv"))}
     </div>
     <div class="kw-summary">
+      ${ks ? `<div class="stat-card highlight"><div class="stat-label">${escapeHtml(t("seo_overall"))}</div><div class="stat-value"><span class="score ${ks.overallBracket.cls}">${ks.overall}</span></div><div class="stat-sub">vol ${ks.volumeScore} · comp ${ks.competitionScore}</div></div>` : ""}
       <div class="stat-card"><div class="stat-label">${escapeHtml(t("difficulty"))}</div><div class="stat-value"><span class="score ${summary.diffClass}">${summary.difficulty}</span></div></div>
       <div class="stat-card highlight"><div class="stat-label">${escapeHtml(t("cash_score"))}</div><div class="stat-value"><span class="score ${scoreClass(m.cashScore)}">💰 ${m.cashScore}</span></div><div class="stat-sub">${escapeHtml(verticalLabel(m.vertical))} · ${fmtMoney(m.monthlyMin)}–${fmtMoney(m.monthlyMax)}/mo</div></div>
       <div class="stat-card"><div class="stat-label">YT results</div><div class="stat-value">${fmtNum(summary.totalResults)}</div></div>

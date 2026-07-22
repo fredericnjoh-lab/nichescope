@@ -20,6 +20,7 @@ import { onTrending } from "./features/trending.js";
 import { onChannel } from "./features/channel.js";
 import { onKeyword } from "./features/keyword.js";
 import { onOutliers } from "./features/outliers.js";
+import { initOptimize, onOptimizeKeyword } from "./features/optimize.js";
 import { getFavorites } from "./favorites.js";
 import { getBrand, saveBrand } from "./brand.js";
 
@@ -68,6 +69,13 @@ function replaySearch(tab, query) {
   }
   if (tab === "channel") { $("#channel-input").value = query; $("#form-channel").requestSubmit(); }
   if (tab === "keyword") { $("#keyword-query").value = query; $("#form-keyword").requestSubmit(); }
+  if (tab === "optimize") {
+    const q = query.startsWith("video · ") ? "" : query;
+    if (q) {
+      $("#optimize-query").value = q;
+      onOptimizeKeyword({ preventDefault() {} });
+    }
+  }
   if (tab === "outliers") {
     const q = query.split(" · ")[0];
     $("#outliers-input").value = q;
@@ -100,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
   wireTabs();
   wireOnboarding();
   initStudio();
+  initOptimize();
   renderPipeline();
 
   $("#saveKey")?.addEventListener("click", () => {

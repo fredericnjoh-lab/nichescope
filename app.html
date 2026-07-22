@@ -43,6 +43,7 @@
     <button type="button" class="tab" data-tab="trending" role="tab" aria-selected="false" data-i18n="tab_trending">Tendances</button>
     <button type="button" class="tab" data-tab="channel" role="tab" aria-selected="false" data-i18n="tab_channel">Chaînes</button>
     <button type="button" class="tab" data-tab="keyword" role="tab" aria-selected="false" data-i18n="tab_keyword">Mots-clés</button>
+    <button type="button" class="tab" data-tab="optimize" role="tab" aria-selected="false" data-i18n="tab_optimize">Optimize</button>
     <button type="button" class="tab" data-tab="outliers" role="tab" aria-selected="false" data-i18n="tab_outliers">Outliers</button>
   </nav>
 
@@ -216,6 +217,56 @@
         <button type="submit" class="btn-primary" data-i18n="keyword_go">Analyser</button>
       </form>
       <div id="keyword-results" class="results"></div>
+    </section>
+
+    <!-- OPTIMIZE (vidIQ-style) -->
+    <section class="panel" id="panel-optimize" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="optimize_h2">Optimize — SEO YouTube</h2>
+        <p data-i18n="optimize_p">Keyword score, titres, tags, description, et audit SEO d’une vidéo (style vidIQ).</p>
+      </div>
+
+      <form class="form-row" id="form-optimize">
+        <input type="text" id="optimize-query" data-i18n-placeholder="optimize_placeholder" placeholder="e.g. personal finance tips" required />
+        <button type="submit" class="btn-primary" data-i18n="optimize_go">Analyser le keyword</button>
+      </form>
+      <div id="optimize-results" class="results"></div>
+
+      <div class="seo-split" id="seo-draft-block">
+        <div class="seo-panel">
+          <h3 data-i18n="seo_draft_h3">Score ton brouillon</h3>
+          <form id="form-seo-draft" class="seo-form">
+            <label><span data-i18n="seo_focus">Mot-clé focus</span>
+              <input type="text" id="seo-draft-keyword" />
+            </label>
+            <label><span data-i18n="seo_title">Titre</span>
+              <input type="text" id="seo-draft-title" />
+            </label>
+            <label><span data-i18n="seo_tags_label">Tags (virgules)</span>
+              <input type="text" id="seo-draft-tags" />
+            </label>
+            <label><span data-i18n="seo_desc_label">Description</span>
+              <textarea id="seo-draft-desc" rows="5"></textarea>
+            </label>
+            <button type="submit" class="btn-primary" data-i18n="seo_score_btn">Scorer le SEO</button>
+          </form>
+          <div id="seo-draft-score"></div>
+        </div>
+
+        <div class="seo-panel">
+          <h3 data-i18n="seo_video_h3">Auditer une vidéo</h3>
+          <form id="form-seo-video" class="seo-form">
+            <label><span data-i18n="seo_video_url_label">URL ou ID YouTube</span>
+              <input type="text" id="seo-video-url" placeholder="https://youtube.com/watch?v=…" required />
+            </label>
+            <label><span data-i18n="seo_focus">Mot-clé focus</span>
+              <input type="text" id="seo-video-keyword" />
+            </label>
+            <button type="submit" class="btn-primary" data-i18n="seo_video_btn">Auditer la vidéo</button>
+          </form>
+          <div id="seo-video-results" class="results"></div>
+        </div>
+      </div>
     </section>
 
     <!-- OUTLIERS -->

@@ -22,7 +22,8 @@ Les chiffres AdSense sont des **ordres de grandeur** (benchmarks industrie), pas
 | Niches | Sous-niches + Cash Score |
 | Tendances | Vidéos à plus forte vélocité |
 | Chaînes | Stats, AdSense estimé, compare jusqu’à 3 |
-| Mots-clés | Difficulté + cash du keyword |
+| Mots-clés | Difficulté + overall score + cash |
+| **Optimize** | SEO score, tags, titres, desc, audit vidéo (style vidIQ) |
 | Outliers | Vidéos breakout d’une chaîne |
 
 Aussi : i18n **FR/EN**, thème clair/sombre, historique, favoris, cache TTL par endpoint, export CSV/JSON, onboarding clé API.
