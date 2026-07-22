@@ -21,6 +21,7 @@ import { onChannel } from "./features/channel.js";
 import { onKeyword } from "./features/keyword.js";
 import { onOutliers } from "./features/outliers.js";
 import { initOptimize, onOptimizeKeyword } from "./features/optimize.js";
+import { initScorecard, onScorecard } from "./features/scorecard.js";
 import { getFavorites } from "./favorites.js";
 import { getBrand, saveBrand } from "./brand.js";
 
@@ -76,6 +77,10 @@ function replaySearch(tab, query) {
       onOptimizeKeyword({ preventDefault() {} });
     }
   }
+  if (tab === "scorecard") {
+    $("#scorecard-input").value = query;
+    onScorecard({ preventDefault() {} });
+  }
   if (tab === "outliers") {
     const q = query.split(" · ")[0];
     $("#outliers-input").value = q;
@@ -109,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   wireOnboarding();
   initStudio();
   initOptimize();
+  initScorecard();
   renderPipeline();
 
   $("#saveKey")?.addEventListener("click", () => {

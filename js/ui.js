@@ -59,6 +59,7 @@ export function renderHistory(replaySearch) {
     channel: t("tab_channel"),
     keyword: t("tab_keyword"),
     optimize: t("tab_optimize"),
+    scorecard: t("tab_scorecard"),
     outliers: t("tab_outliers"),
   };
   $("#history-list").innerHTML = arr.map(h => `

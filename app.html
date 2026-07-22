@@ -44,6 +44,7 @@
     <button type="button" class="tab" data-tab="channel" role="tab" aria-selected="false" data-i18n="tab_channel">Chaînes</button>
     <button type="button" class="tab" data-tab="keyword" role="tab" aria-selected="false" data-i18n="tab_keyword">Mots-clés</button>
     <button type="button" class="tab" data-tab="optimize" role="tab" aria-selected="false" data-i18n="tab_optimize">Optimize</button>
+    <button type="button" class="tab" data-tab="scorecard" role="tab" aria-selected="false" data-i18n="tab_scorecard">Scorecard</button>
     <button type="button" class="tab" data-tab="outliers" role="tab" aria-selected="false" data-i18n="tab_outliers">Outliers</button>
   </nav>
 
@@ -267,6 +268,20 @@
           <div id="seo-video-results" class="results"></div>
         </div>
       </div>
+    </section>
+
+    <!-- SCORECARD (competitor compare) -->
+    <section class="panel" id="panel-scorecard" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="sc_h2">Scorecard concurrents</h2>
+        <p data-i18n="sc_p">Compare jusqu’à 4 chaînes : score concurrent, engagement, croissance, outliers, keywords et cash.</p>
+      </div>
+      <form class="form-row" id="form-scorecard">
+        <input type="text" id="scorecard-input" data-i18n-placeholder="sc_placeholder" placeholder="@A, @B, @C" required />
+        <button type="button" class="btn-csv" id="scorecard-from-pipeline" data-i18n="sc_from_pipeline">Depuis pipeline ★</button>
+        <button type="submit" class="btn-primary" data-i18n="sc_go">Comparer</button>
+      </form>
+      <div id="scorecard-results" class="results"></div>
     </section>
 
     <!-- OUTLIERS -->
