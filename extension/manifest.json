@@ -1,16 +1,24 @@
 {
   "manifest_version": 3,
   "name": "NicheScope SEO",
-  "version": "1.0.0",
-  "description": "Score SEO titre / description / tags sur YouTube (style NicheScope).",
+  "version": "1.1.0",
+  "description": "Score SEO titre / description / tags sur YouTube & Studio (NicheScope).",
   "permissions": ["storage", "activeTab"],
   "host_permissions": [
     "https://www.youtube.com/*",
     "https://studio.youtube.com/*"
   ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_title": "NicheScope SEO",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
   },
   "content_scripts": [
     {

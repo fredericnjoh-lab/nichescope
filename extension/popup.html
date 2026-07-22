@@ -6,16 +6,41 @@
   <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <h1>NicheScope SEO</h1>
+  <header>
+    <span class="mark">NS</span>
+    <div>
+      <h1>NicheScope SEO</h1>
+      <p class="sub" id="sub">Score titre / desc / tags sur YouTube</p>
+    </div>
+  </header>
+
+  <label class="row-check">
+    <input type="checkbox" id="enabled" checked />
+    <span id="lbl-enabled">Afficher le panel</span>
+  </label>
+
   <label>
-    Mot-clé focus
+    <span id="lbl-focus">Mot-clé focus</span>
     <input type="text" id="focus" placeholder="ex. finance personnelle" />
   </label>
+
+  <label>
+    <span id="lbl-lang">Langue</span>
+    <select id="lang">
+      <option value="fr">Français</option>
+      <option value="en">English</option>
+    </select>
+  </label>
+
   <button type="button" id="save">Sauver</button>
   <p id="status" hidden>Sauvé ✓</p>
-  <a id="open-app" href="https://fredericnjoh-lab.github.io/nichescope/app.html" target="_blank" rel="noopener">
-    Ouvrir NicheScope
-  </a>
+
+  <div class="links">
+    <a id="open-opt" href="#" target="_blank" rel="noopener">Optimize</a>
+    <a id="open-app" href="https://fredericnjoh-lab.github.io/nichescope/app.html" target="_blank" rel="noopener">App</a>
+  </div>
+
+  <p class="hint" id="hint">Reload la page YouTube après installation / update.</p>
   <script src="popup.js"></script>
 </body>
 </html>

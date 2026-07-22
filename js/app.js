@@ -113,6 +113,26 @@ function wireTabs() {
   });
 }
 
+function applyDeepLink() {
+  try {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    const q = params.get("q");
+    if (tab) switchTab(tab);
+    if (q && tab === "optimize" && $("#optimize-query")) {
+      $("#optimize-query").value = q;
+      onOptimizeKeyword({ preventDefault() {} });
+    }
+    if (q && tab === "keyword" && $("#keyword-query")) {
+      $("#keyword-query").value = q;
+      $("#form-keyword")?.requestSubmit();
+    }
+    if (q && tab === "rankings" && $("#rk-keyword")) {
+      $("#rk-keyword").value = q;
+    }
+  } catch { /* ignore */ }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
   applyI18n();
@@ -128,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initIdeas();
   initRankings();
   renderPipeline();
+  applyDeepLink();
 
   $("#saveKey")?.addEventListener("click", () => {
     if (saveKey()) flashSaved();
