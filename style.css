@@ -1146,6 +1146,52 @@ footer {
 
 .hidden { display: none !important; }
 
+.panel-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.panel-title-row h2,
+.panel-title-row h3 { margin: 0; }
+.tier-chip {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.tier-chip.free {
+  color: var(--good);
+  border-color: color-mix(in srgb, var(--good) 40%, var(--border));
+}
+.tier-chip.audit {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+}
+.tier-chip.pro {
+  color: var(--text);
+  border-color: var(--border);
+  background: var(--surface-2);
+}
+.plans-strip {
+  margin: 10px 0 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+.plans-strip a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+.plans-strip a:hover { text-decoration: underline; }
+
 /* Rankings (Supabase) */
 .rk-status {
   display: flex;

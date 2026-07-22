@@ -46,14 +46,33 @@ export function safeHttpUrl(value) {
   }
 }
 
-export function calendlyHref(brand = getBrand()) {
-  return safeHttpUrl(brand.calendlyUrl);
+export function calendlyHref(brand = getBrand(), { offer = "" } = {}) {
+  const base = safeHttpUrl(brand.calendlyUrl);
+  if (!base) return "";
+  try {
+    const u = new URL(base);
+    if (offer) {
+      u.searchParams.set("utm_source", "nichescope");
+      u.searchParams.set("utm_medium", "landing");
+      u.searchParams.set("utm_campaign", offer);
+    }
+    return u.toString();
+  } catch {
+    return base;
+  }
 }
 
-export function mailtoHref(brand = getBrand()) {
+export function mailtoHref(brand = getBrand(), { offer = "" } = {}) {
   const email = String(brand.email || "").trim();
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "";
   const url = new URL(`mailto:${email}`);
-  url.searchParams.set("subject", "Audit YouTube NicheScope");
+  const subject = offer === "flash"
+    ? "Audit Flash NicheScope"
+    : offer === "studio"
+      ? "Audit Studio NicheScope"
+      : offer === "pro"
+        ? "NicheScope Pro"
+        : "Audit YouTube NicheScope";
+  url.searchParams.set("subject", subject);
   return url.toString();
 }

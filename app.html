@@ -54,8 +54,17 @@
     <!-- STUDIO CASH -->
     <section class="panel active" id="panel-studio" role="tabpanel">
       <div class="panel-head studio-hero">
-        <h2 data-i18n="studio_h2">Ton studio YouTube — niches qui monétisent</h2>
+        <div class="panel-title-row">
+          <h2 data-i18n="studio_h2">Ton studio YouTube — niches qui monétisent</h2>
+          <span class="tier-chip free" data-i18n="tier_free">Gratuit</span>
+        </div>
         <p data-i18n="studio_p">Identifie les sous-niches et chaînes qui génèrent de l’argent (AdSense + affilié), classe-les par Cash Score, et construis ton pipeline.</p>
+        <p class="plans-strip">
+          <span data-i18n="plans_strip">Gratuit pour explorer ·</span>
+          <a href="index.html#offres" data-i18n="plans_audit_link">Audits Flash / Studio</a>
+          <span>·</span>
+          <a href="index.html#offres" data-i18n="plans_pro_link">Pro Rankings</a>
+        </p>
       </div>
       <form class="form-row" id="form-studio">
         <input type="text" id="studio-query" data-i18n-placeholder="studio_placeholder" placeholder="ex. finance perso, outils IA…" required />
@@ -94,8 +103,12 @@
       </aside>
 
       <aside class="audit-box" aria-label="Client audit">
-        <h3 data-i18n="audit_h3">Rapport d’audit client</h3>
+        <div class="panel-title-row">
+          <h3 data-i18n="audit_h3">Rapport d’audit client</h3>
+          <span class="tier-chip audit" data-i18n="tier_audit">Audit</span>
+        </div>
         <p class="plan-desc" data-i18n="audit_desc">Génère un rapport imprimable (PDF) pour un prospect : niches cash, chaînes, outliers, calendrier, briefs.</p>
+        <p class="plan-desc muted" style="font-size:12px;" data-i18n="audit_tier_hint">Outil gratuit pour produire le PDF · offre payante = livrable + call (voir landing).</p>
         <form class="form-row plan-form" id="form-audit">
           <input type="text" id="audit-client" data-i18n-placeholder="audit_client_ph" placeholder="Nom du prospect / marque" />
           <input type="text" id="audit-niche" data-i18n-placeholder="audit_niche_ph" placeholder="Niche focus (ou laisse le scan Studio)" />
@@ -225,7 +238,10 @@
     <!-- OPTIMIZE (vidIQ-style) -->
     <section class="panel" id="panel-optimize" role="tabpanel">
       <div class="panel-head">
-        <h2 data-i18n="optimize_h2">Optimize — SEO YouTube</h2>
+        <div class="panel-title-row">
+          <h2 data-i18n="optimize_h2">Optimize — SEO YouTube</h2>
+          <span class="tier-chip free" data-i18n="tier_free">Gratuit</span>
+        </div>
         <p data-i18n="optimize_p">Keyword score, titres, tags, description, et audit SEO d’une vidéo (style vidIQ).</p>
       </div>
 
@@ -275,8 +291,15 @@
     <!-- RANKINGS (Supabase) -->
     <section class="panel" id="panel-rankings" role="tabpanel">
       <div class="panel-head">
-        <h2 data-i18n="rk_h2">Rankings — historique keywords</h2>
+        <div class="panel-title-row">
+          <h2 data-i18n="rk_h2">Rankings — historique keywords</h2>
+          <span class="tier-chip pro" data-i18n="tier_pro">Pro</span>
+        </div>
         <p data-i18n="rk_p">Suis des mots-clés dans le temps (Supabase). Proxy scores, pas le volume propriétaire vidIQ.</p>
+        <p class="plans-strip">
+          <span data-i18n="rk_pro_hint">Self-host gratuit via ton Supabase · offre Pro hébergée sur demande.</span>
+          <a href="index.html#offres" data-i18n="plans_pro_link">Voir Pro</a>
+        </p>
       </div>
 
       <div id="rankings-status" class="rk-status hidden" aria-live="polite"></div>
@@ -317,7 +340,10 @@
     <!-- DAILY IDEAS / TOPIC TRACKER -->
     <section class="panel" id="panel-ideas" role="tabpanel">
       <div class="panel-head">
-        <h2 data-i18n="ideas_h2">Idées du jour · Topic tracker</h2>
+        <div class="panel-title-row">
+          <h2 data-i18n="ideas_h2">Idées du jour · Topic tracker</h2>
+          <span class="tier-chip free" data-i18n="tier_free">Gratuit</span>
+        </div>
         <p data-i18n="ideas_p">Cluster les vidéos récentes en sujets à filmer, avec score d’opportunité et suivi local (★).</p>
       </div>
       <form class="form-row" id="form-ideas">
@@ -353,7 +379,10 @@
     <!-- SCORECARD (competitor compare) -->
     <section class="panel" id="panel-scorecard" role="tabpanel">
       <div class="panel-head">
-        <h2 data-i18n="sc_h2">Scorecard concurrents</h2>
+        <div class="panel-title-row">
+          <h2 data-i18n="sc_h2">Scorecard concurrents</h2>
+          <span class="tier-chip free" data-i18n="tier_free">Gratuit</span>
+        </div>
         <p data-i18n="sc_p">Compare jusqu’à 4 chaînes : score concurrent, engagement, croissance, outliers, keywords et cash.</p>
       </div>
       <form class="form-row" id="form-scorecard">

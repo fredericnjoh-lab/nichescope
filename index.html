@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NicheScope — YouTube audits that monetize</title>
-  <meta name="description" id="meta-desc" content="Find YouTube niches that make money. Flash Audit or Studio Audit: Cash Score, competitors, editorial calendar, title & thumbnail briefs." />
+  <meta name="description" id="meta-desc" content="Find YouTube niches that make money. Free studio, paid audits, Pro tracking." />
   <meta property="og:title" id="og-title" content="NicheScope — YouTube audits that monetize" />
   <meta property="og:description" id="og-desc" content="Where the money is in your niche, who takes it, and what to publish for the next 4 weeks." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -22,10 +22,11 @@
       <span class="land-name" id="brand-name">NicheScope</span>
     </a>
     <nav class="land-nav-links">
-      <a href="#offres" data-i18n="nav_offers">Offers</a>
-      <a href="app.html" data-i18n="nav_app">Open app</a>
+      <a href="#offres" data-i18n="nav_offers">Offres</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a href="app.html" data-i18n="nav_app">Ouvrir l’app</a>
       <button type="button" class="lang-toggle" id="langToggle" aria-label="Language">FR</button>
-      <a class="land-nav-cta" id="nav-calendly" href="#offres" data-i18n="nav_book">Book</a>
+      <a class="land-nav-cta" id="nav-calendly" href="#offres" data-i18n="nav_book">Réserver</a>
     </nav>
   </header>
 
@@ -35,52 +36,132 @@
       <div class="hero-copy">
         <p class="hero-brand" id="hero-brand">NicheScope</p>
         <h1 class="hero-title">
-          <span data-i18n="hero_line1">YouTube niches</span><br />
-          <em data-i18n="hero_line2">that actually pay</em>
+          <span data-i18n="hero_line1">Les niches YouTube</span><br />
+          <em data-i18n="hero_line2">qui rapportent vraiment</em>
         </h1>
         <p class="hero-sub" data-i18n="hero_sub">
-          Where the money is in your niche, who takes it, and what to publish for the next 4 weeks.
+          L’outil gratuit pour creuser. L’audit payant pour livrer le plan.
         </p>
         <div class="hero-cta">
-          <a class="btn-hero primary" id="cta-calendly" href="#offres" data-i18n="cta_book">Book an audit</a>
-          <a class="btn-hero ghost" href="app.html" data-i18n="cta_studio">Launch the studio</a>
+          <a class="btn-hero primary" href="app.html" data-i18n="cta_studio">Lancer le studio gratuit</a>
+          <a class="btn-hero ghost" id="cta-calendly" href="#offres" data-i18n="cta_book">Voir les audits</a>
         </div>
       </div>
     </section>
 
     <section class="offers" id="offres">
-      <h2 data-i18n="offers_h2">Two ways to start</h2>
-      <p class="offers-lead" data-i18n="offers_lead">A clear deliverable. No dashboard fluff.</p>
+      <h2 data-i18n="offers_h2">Gratuit · Audit · Pro</h2>
+      <p class="offers-lead" data-i18n="offers_lead">L’outil te montre où creuser. L’audit te livre le plan prêt à publier ou vendre.</p>
+
       <div class="offer-rows">
-        <article class="offer">
-          <h3 id="offer-flash" data-i18n="offer_flash_title">Flash Audit — 48–72h</h3>
-          <p data-i18n="offer_flash_body">1 niche · 2 competitors · 8 titles · 2-week calendar · branded PDF</p>
-          <a class="offer-link" id="cta-flash" href="#offres" data-i18n="offer_flash_cta">Book Flash →</a>
+        <!-- FREE -->
+        <article class="offer offer-free">
+          <div class="offer-top">
+            <span class="tier-badge free" data-i18n="tier_free">Gratuit</span>
+            <span class="offer-price" data-i18n="price_free">0 €</span>
+          </div>
+          <h3 data-i18n="offer_free_title">Studio self-serve</h3>
+          <p data-i18n="offer_free_body">Cash Score, Optimize SEO, Scorecard, Idées, extension Chrome. Ta clé YouTube, dans le navigateur.</p>
+          <ul class="offer-list">
+            <li data-i18n="offer_free_1">Studio Cash + niches + tendances</li>
+            <li data-i18n="offer_free_2">Optimize + extension YouTube</li>
+            <li data-i18n="offer_free_3">Compare chaînes & outliers</li>
+            <li data-i18n="offer_free_4">Topic tracker local</li>
+          </ul>
+          <a class="offer-link" href="app.html" data-i18n="offer_free_cta">Ouvrir l’app →</a>
         </article>
+
+        <!-- FLASH -->
+        <article class="offer">
+          <div class="offer-top">
+            <span class="tier-badge audit" data-i18n="tier_audit">Audit</span>
+            <span class="offer-price" data-i18n="price_flash">297 €</span>
+          </div>
+          <h3 data-i18n="offer_flash_title">Audit Flash — 48–72h</h3>
+          <p data-i18n="offer_flash_body">Idéal pour valider une niche avant de produire. Livrable PDF branded.</p>
+          <ul class="offer-list">
+            <li data-i18n="offer_flash_1">1 niche cash scorée</li>
+            <li data-i18n="offer_flash_2">2 concurrents analysés</li>
+            <li data-i18n="offer_flash_3">8 titres + calendrier 2 semaines</li>
+            <li data-i18n="offer_flash_4">PDF prêt à forwarder</li>
+          </ul>
+          <a class="offer-link" id="cta-flash" href="#contact" data-i18n="offer_flash_cta">Réserver le Flash →</a>
+        </article>
+
+        <!-- STUDIO AUDIT -->
         <article class="offer offer-accent">
-          <h3 id="offer-studio" data-i18n="offer_studio_title">Studio Audit — 4-week plan</h3>
-          <p data-i18n="offer_studio_body">3 cash niches · channel compare · outliers · editorial plan + thumb briefs · strategy call</p>
-          <a class="offer-link" id="cta-studio" href="#offres" data-i18n="offer_studio_cta">Book Studio →</a>
+          <div class="offer-top">
+            <span class="tier-badge audit" data-i18n="tier_audit">Audit</span>
+            <span class="offer-price" data-i18n="price_studio">990 €</span>
+          </div>
+          <h3 data-i18n="offer_studio_title">Audit Studio — plan 4 semaines</h3>
+          <p data-i18n="offer_studio_body">Pour lancer ou repositionner une chaîne avec un plan actionnable + call.</p>
+          <ul class="offer-list">
+            <li data-i18n="offer_studio_1">3 niches cash + compare chaînes</li>
+            <li data-i18n="offer_studio_2">Outliers + patterns gagnants</li>
+            <li data-i18n="offer_studio_3">Calendrier 4 semaines + briefs thumbs</li>
+            <li data-i18n="offer_studio_4">Call stratégie 45 min</li>
+          </ul>
+          <a class="offer-link" id="cta-studio" href="#contact" data-i18n="offer_studio_cta">Réserver le Studio →</a>
+        </article>
+
+        <!-- PRO -->
+        <article class="offer offer-pro">
+          <div class="offer-top">
+            <span class="tier-badge pro" data-i18n="tier_pro">Pro</span>
+            <span class="offer-price" data-i18n="price_pro">Sur demande</span>
+          </div>
+          <h3 data-i18n="offer_pro_title">Pro — tracking & agence</h3>
+          <p data-i18n="offer_pro_body">Pour suivre des keywords dans le temps et industrialiser les audits clients.</p>
+          <ul class="offer-list">
+            <li data-i18n="offer_pro_1">Rankings + historique + cron quotidien</li>
+            <li data-i18n="offer_pro_2">Exports client & branding avancé</li>
+            <li data-i18n="offer_pro_3">Pipeline cloud (multi-device)</li>
+            <li data-i18n="offer_pro_4">Self-host possible dès aujourd’hui (Supabase)</li>
+          </ul>
+          <a class="offer-link" id="cta-pro" href="#contact" data-i18n="offer_pro_cta">Parler Pro →</a>
         </article>
       </div>
     </section>
 
     <section class="proof" id="methode">
-      <h2 data-i18n="proof_h2">What you get</h2>
+      <h2 data-i18n="proof_h2">Ce que tu reçois</h2>
       <ul class="proof-list">
-        <li data-i18n-html="proof_1"><strong>Cash Score</strong> — niches ranked by money potential (RPM × demand × ease)</li>
-        <li data-i18n-html="proof_2"><strong>Channel profiles</strong> — AdSense estimate, outliers, money efficiency</li>
-        <li data-i18n-html="proof_3"><strong>Editorial plan</strong> — titles + thumbnail briefs ready to shoot</li>
-        <li data-i18n-html="proof_4"><strong>Printable PDF</strong> — forward to your team or client</li>
+        <li data-i18n-html="proof_1"><strong>Cash Score</strong> — niches classées par potentiel monétaire</li>
+        <li data-i18n-html="proof_2"><strong>Profils chaînes</strong> — estimation AdSense, outliers, efficacité $</li>
+        <li data-i18n-html="proof_3"><strong>Plan éditorial</strong> — titres + briefs thumbnails prêts à tourner</li>
+        <li data-i18n-html="proof_4"><strong>PDF imprimable</strong> — à forwarder à ton équipe ou ton client</li>
       </ul>
     </section>
 
+    <section class="faq" id="faq">
+      <h2 data-i18n="faq_h2">FAQ</h2>
+      <dl class="faq-list">
+        <div>
+          <dt data-i18n="faq_1_q">L’app est vraiment gratuite ?</dt>
+          <dd data-i18n="faq_1_a">Oui. Tu utilises ta clé YouTube Data API. Pas de carte bancaire.</dd>
+        </div>
+        <div>
+          <dt data-i18n="faq_2_q">Quelle est la différence avec l’audit ?</dt>
+          <dd data-i18n="faq_2_a">L’app t’aide à explorer. L’audit est un livrable fait pour toi (analyse + plan + PDF), avec un délai et un call si Studio.</dd>
+        </div>
+        <div>
+          <dt data-i18n="faq_3_q">C’est quoi Pro ?</dt>
+          <dd data-i18n="faq_3_a">Le tracking keywords dans le temps (Rankings + cron) et les usages agence. Tu peux déjà self-hoster Rankings avec Supabase ; l’offre hébergée arrive ensuite.</dd>
+        </div>
+        <div>
+          <dt data-i18n="faq_4_q">Les prix incluent quoi ?</dt>
+          <dd data-i18n="faq_4_a">Flash = PDF en 48–72h. Studio = plan 4 semaines + call. Pas d’abonnement forcé sur les audits.</dd>
+        </div>
+      </dl>
+    </section>
+
     <section class="close" id="contact">
-      <h2 data-i18n="close_h2">Ready to see where the money is?</h2>
-      <p class="close-sub" id="close-tagline" data-i18n="close_tagline">YouTube audits that monetize</p>
+      <h2 data-i18n="close_h2">Prêt à voir où est l’argent ?</h2>
+      <p class="close-sub" id="close-tagline" data-i18n="close_tagline">Audits YouTube qui monétisent</p>
       <div class="hero-cta">
-        <a class="btn-hero primary" id="cta-calendly-2" href="#offres" data-i18n="cta_calendly">Book on Calendly</a>
-        <a class="btn-hero ghost" id="cta-email" href="mailto:" data-i18n="cta_email">Send an email</a>
+        <a class="btn-hero primary" id="cta-calendly-2" href="#offres" data-i18n="cta_calendly">Booker sur Calendly</a>
+        <a class="btn-hero ghost" id="cta-email" href="mailto:" data-i18n="cta_email">Écrire un email</a>
       </div>
       <p class="close-meta" id="analyst-line"></p>
     </section>
@@ -88,7 +169,7 @@
 
   <footer class="land-foot">
     <span id="foot-brand">NicheScope</span>
-    <a href="app.html" data-i18n="foot_app">Studio app</a>
+    <a href="app.html" data-i18n="foot_app">App studio</a>
     <a href="https://github.com/fredericnjoh-lab/nichescope" target="_blank" rel="noopener">GitHub</a>
   </footer>
 

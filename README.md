@@ -2,6 +2,17 @@
 
 Outil gratuit (100 % navigateur) pour trouver des **niches YouTube qui monétisent** — et construire ton propre pipeline de studio.
 
+## Packaging
+
+| Tier | Contenu | Prix indicatif |
+|------|---------|----------------|
+| **Gratuit** | App studio + extension (clé YouTube perso) | 0 € |
+| **Audit Flash** | PDF niche + concurrents + titres (48–72h) | 297 € |
+| **Audit Studio** | Plan 4 semaines + call | 990 € |
+| **Pro** | Rankings / cron / usages agence (hébergé sur demande ; self-host Supabase OK) | Sur demande |
+
+Landing : offres + FAQ. Dans l’app : badges Gratuit / Audit / Pro.
+
 ## Avantage compétitif
 
 - **Cash Score (0–100)** — combine RPM de la verticale, demande (vues/jour), opportunité (vues/abonnés) et facilité d’entrée.

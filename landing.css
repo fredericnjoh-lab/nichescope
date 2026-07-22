@@ -226,6 +226,41 @@ body.landing {
   padding: 28px 0;
   border-bottom: 1px solid rgba(255,255,255,0.12);
 }
+.offer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.tier-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: var(--muted);
+}
+.tier-badge.free {
+  color: var(--cash);
+  border-color: color-mix(in srgb, var(--cash) 45%, transparent);
+}
+.tier-badge.audit {
+  color: var(--accent-2);
+  border-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+.tier-badge.pro {
+  color: #f2f4f8;
+  border-color: rgba(255,255,255,0.35);
+}
+.offer-price {
+  font-family: var(--display);
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
 .offer h3 {
   margin: 0 0 8px;
   font-size: 20px;
@@ -234,7 +269,21 @@ body.landing {
 .offer p {
   margin: 0 0 12px;
   color: var(--muted);
-  max-width: 48ch;
+  max-width: 52ch;
+}
+.offer-list {
+  margin: 0 0 16px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.offer-list li::before {
+  content: "– ";
+  color: rgba(255,255,255,0.35);
 }
 .offer-accent h3 { color: var(--cash); }
 .offer-link {
@@ -244,6 +293,34 @@ body.landing {
   font-size: 14px;
 }
 .offer-link:hover { text-decoration: underline; }
+
+.faq {
+  padding: 80px 28px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.faq h2 {
+  font-family: var(--display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 400;
+  margin: 0 0 24px;
+  letter-spacing: -0.02em;
+}
+.faq-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.faq-list dt {
+  font-weight: 650;
+  margin-bottom: 6px;
+}
+.faq-list dd {
+  margin: 0;
+  color: var(--muted);
+  max-width: 60ch;
+}
 
 .proof-list {
   margin: 24px 0 0;
@@ -295,6 +372,6 @@ body.landing {
   .land-nav-links a:not(.land-nav-cta) { display: none; }
   .hero { padding: 0 16px 10vh; align-items: center; }
   .hero-brand { font-size: clamp(42px, 14vw, 72px); }
-  .offers, .proof, .close { padding: 56px 16px; }
+  .offers, .proof, .faq, .close { padding: 56px 16px; }
   .btn-hero { width: 100%; }
 }
