@@ -23,7 +23,7 @@ import { onOutliers } from "./features/outliers.js";
 import { initOptimize, onOptimizeKeyword } from "./features/optimize.js";
 import { initScorecard, onScorecard } from "./features/scorecard.js";
 import { initIdeas, onIdeas } from "./features/ideas.js";
-import { initRankings } from "./features/rankings.js";
+import { initRankings, refreshRankingsIfConfigured } from "./features/rankings.js";
 import { getFavorites } from "./favorites.js";
 import { getBrand, saveBrand } from "./brand.js";
 
@@ -98,16 +98,21 @@ function replaySearch(tab, query) {
   }
 }
 
+function goTab(tabId) {
+  switchTab(tabId);
+  if (tabId === "rankings") refreshRankingsIfConfigured();
+}
+
 function wireTabs() {
   $$(".tab").forEach(tab => {
-    tab.addEventListener("click", () => switchTab(tab.dataset.tab));
+    tab.addEventListener("click", () => goTab(tab.dataset.tab));
     tab.addEventListener("keydown", (e) => {
       if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
         const tabs = $$(".tab");
         const i = tabs.indexOf(tab);
         const next = e.key === "ArrowRight" ? tabs[(i + 1) % tabs.length] : tabs[(i - 1 + tabs.length) % tabs.length];
         next.focus();
-        switchTab(next.dataset.tab);
+        goTab(next.dataset.tab);
       }
     });
   });

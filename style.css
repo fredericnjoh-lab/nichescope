@@ -1147,6 +1147,28 @@ footer {
 .hidden { display: none !important; }
 
 /* Rankings (Supabase) */
+.rk-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+  font-size: 13px;
+}
+.rk-status-left { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.rk-status-right { display: flex; gap: 6px; }
+.rk-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--good);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--good) 25%, transparent);
+}
 .rk-setup {
   max-width: 520px;
   padding: 16px;
@@ -1156,24 +1178,118 @@ footer {
   margin-bottom: 20px;
 }
 .rk-setup h3 { margin: 0 0 6px; font-size: 16px; }
-.rk-list { display: flex; flex-direction: column; gap: 12px; }
-.rk-spark {
+.rk-setup-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+
+.rk-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.rk-sum-card {
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.rk-sum-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+.rk-sum-value { font-size: 22px; font-weight: 700; letter-spacing: -0.02em; }
+
+.rk-toolbar { align-items: center; gap: 12px; }
+.rk-toolbar-right {
   display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.rk-sort {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.rk-sort select {
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.rk-list { display: flex; flex-direction: column; gap: 12px; }
+.rk-card.stale { border-color: color-mix(in srgb, var(--warn, #e6b84d) 45%, var(--border)); }
+.rk-card-main {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+.rk-card-left { min-width: 0; flex: 1; }
+.rk-card-right {
+  display: flex;
+  flex-direction: column;
   align-items: flex-end;
-  gap: 3px;
-  height: 32px;
-  margin: 8px 0;
+  gap: 6px;
+  flex-shrink: 0;
 }
-.rk-bar {
-  width: 6px;
-  background: var(--accent);
-  border-radius: 2px 2px 0 0;
-  opacity: 0.75;
+.rk-score-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
-.rk-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.rk-delta { font-size: 12px; font-weight: 700; }
+.rk-big { font-size: 28px; font-weight: 750; letter-spacing: -0.03em; }
+.rk-pill {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 11px;
+}
+.rk-stale-pill {
+  color: var(--warn, #e6b84d);
+  font-size: 11px;
+  font-weight: 600;
+}
+.rk-mini-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.rk-mini-stats b { color: var(--text); }
+.rk-spark-svg { color: var(--accent); opacity: 0.9; }
+.rk-spark-svg.up { color: var(--good); }
+.rk-spark-svg.down { color: var(--accent); }
+.rk-spark-empty { height: 36px; line-height: 36px; font-size: 12px; }
+.rk-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.rk-delta { font-size: 12px; font-weight: 700; margin-left: 4px; }
 .rk-delta.up { color: var(--good); }
 .rk-delta.down { color: var(--accent); }
+.rk-hist-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 12px 0 8px;
+}
+.rk-empty {
+  text-align: left;
+  padding: 28px 20px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.rk-empty h3 { margin: 0 0 6px; font-size: 18px; }
+.rk-empty-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.rk-footnote { font-size: 12px; margin-top: 16px; }
+
+@media (max-width: 640px) {
+  .rk-card-main { flex-direction: column; }
+  .rk-card-right { align-items: flex-start; }
+}
 
 /* Daily ideas / topic tracker */
 .ideas-grid {

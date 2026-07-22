@@ -279,6 +279,8 @@
         <p data-i18n="rk_p">Suis des mots-clés dans le temps (Supabase). Proxy scores, pas le volume propriétaire vidIQ.</p>
       </div>
 
+      <div id="rankings-status" class="rk-status hidden" aria-live="polite"></div>
+
       <div id="rankings-setup" class="rk-setup">
         <h3 data-i18n="rk_setup_h3">Connecter Supabase</h3>
         <p class="plan-desc" data-i18n="rk_setup_p">Colle l’URL projet + anon key. Active Anonymous sign-in dans Auth. Puis push la migration + deploy scan-keyword.</p>
@@ -289,7 +291,10 @@
           <label><span>Anon key</span>
             <input type="password" id="sb-anon" autocomplete="off" required />
           </label>
-          <button type="submit" class="btn-primary" data-i18n="rk_connect">Connecter</button>
+          <div class="rk-setup-actions">
+            <button type="submit" class="btn-primary" data-i18n="rk_connect">Connecter</button>
+            <button type="button" class="btn-csv" id="rk-disconnect" data-i18n="rk_disconnect">Déconnecter</button>
+          </div>
         </form>
         <p class="muted" style="font-size:12px;margin-top:10px;" data-i18n="rk_setup_docs">Voir README → section Supabase.</p>
       </div>
