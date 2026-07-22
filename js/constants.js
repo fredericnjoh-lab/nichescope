@@ -7,4 +7,5 @@ export const LANG_KEY = "nschost:lang";
 export const FAV_KEY = "nschost:favorites";
 export const ONBOARD_KEY = "nschost:onboarded";
 export const BRAND_KEY = "nschost:brand";
+export const TOPICS_KEY = "nschost:topics";
 export const QUOTA_DAILY_LIMIT = 10000;

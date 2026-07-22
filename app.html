@@ -45,6 +45,7 @@
     <button type="button" class="tab" data-tab="keyword" role="tab" aria-selected="false" data-i18n="tab_keyword">Mots-clés</button>
     <button type="button" class="tab" data-tab="optimize" role="tab" aria-selected="false" data-i18n="tab_optimize">Optimize</button>
     <button type="button" class="tab" data-tab="scorecard" role="tab" aria-selected="false" data-i18n="tab_scorecard">Scorecard</button>
+    <button type="button" class="tab" data-tab="ideas" role="tab" aria-selected="false" data-i18n="tab_ideas">Idées</button>
     <button type="button" class="tab" data-tab="outliers" role="tab" aria-selected="false" data-i18n="tab_outliers">Outliers</button>
   </nav>
 
@@ -267,6 +268,42 @@
           </form>
           <div id="seo-video-results" class="results"></div>
         </div>
+      </div>
+    </section>
+
+    <!-- DAILY IDEAS / TOPIC TRACKER -->
+    <section class="panel" id="panel-ideas" role="tabpanel">
+      <div class="panel-head">
+        <h2 data-i18n="ideas_h2">Idées du jour · Topic tracker</h2>
+        <p data-i18n="ideas_p">Cluster les vidéos récentes en sujets à filmer, avec score d’opportunité et suivi local (★).</p>
+      </div>
+      <form class="form-row" id="form-ideas">
+        <input type="text" id="ideas-query" data-i18n-placeholder="ideas_placeholder" placeholder="ex. finance perso (ou vide = pipeline ★)" />
+        <select id="ideas-window" aria-label="Fenêtre">
+          <option value="7">7j</option>
+          <option value="14" selected>14j</option>
+          <option value="30">30j</option>
+        </select>
+        <select id="ideas-region" aria-label="Région">
+          <option value="FR" selected>France</option>
+          <option value="">Monde</option>
+          <option value="US">United States</option>
+          <option value="GB">United Kingdom</option>
+          <option value="CA">Canada</option>
+        </select>
+        <select id="ideas-format">
+          <option value="all" data-i18n="format_all">Tous formats</option>
+          <option value="long" data-i18n="format_long">Long-form</option>
+          <option value="shorts" data-i18n="format_shorts">Shorts</option>
+        </select>
+        <button type="button" class="btn-csv" id="ideas-from-pipeline" data-i18n="ideas_from_pipeline">Niche pipeline ★</button>
+        <button type="submit" class="btn-primary" data-i18n="ideas_go">Générer les idées</button>
+      </form>
+      <div id="ideas-results" class="results"></div>
+      <div class="ideas-tracker-block">
+        <h3 data-i18n="ideas_tracker_h3">Topic tracker</h3>
+        <p class="plan-desc" data-i18n="ideas_tracker_p">Sujets sauvegardés localement — clique le statut pour avancer (idée → script → tournage → publié).</p>
+        <div id="ideas-tracker"></div>
       </div>
     </section>
 

@@ -1144,6 +1144,46 @@ footer {
   .seo-split { grid-template-columns: 1fr; }
 }
 
+/* Daily ideas / topic tracker */
+.ideas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+}
+.idea-card .ideas-angles {
+  margin: 8px 0;
+  padding-left: 18px;
+  font-size: 13px;
+}
+.ideas-evidence { display: flex; flex-direction: column; gap: 4px; }
+.ideas-tracker-block {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.ideas-tracker-block h3 {
+  margin: 0 0 4px;
+  font-size: 16px;
+}
+.ideas-tracker-list { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
+.ideas-track-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+.ideas-track-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.ideas-track-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
 /* Competitor scorecard */
 .sc-header-grid {
   display: grid;
