@@ -5,8 +5,8 @@
   --accent: #e11d37;
   --accent-2: #ff4d63;
   --cash: #4ade80;
-  --font: "DM Sans", "Segoe UI", sans-serif;
-  --display: "Instrument Serif", Georgia, serif;
+  --font: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --display: "Syne", "Plus Jakarta Sans", sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -62,8 +62,9 @@ body.landing {
 }
 .land-name {
   font-family: var(--display);
-  font-size: 24px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
 }
 .land-nav-links {
   display: flex;
@@ -141,25 +142,25 @@ body.landing {
 
 .hero-brand {
   font-family: var(--display);
-  font-size: clamp(48px, 10vw, 96px);
+  font-size: clamp(52px, 11vw, 104px);
   margin: 0 0 12px;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  font-weight: 800;
 }
 .hero-title {
   font-family: var(--display);
   font-size: clamp(28px, 5vw, 44px);
-  font-weight: 400;
+  font-weight: 700;
   margin: 0 0 14px;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  max-width: 16ch;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  max-width: 18ch;
   animation: rise-in 0.9s 0.12s cubic-bezier(.2,.8,.2,1) both;
 }
 .hero-title em {
-  font-style: italic;
-  color: var(--cash);
+  font-style: normal;
+  color: var(--accent-2);
 }
 .hero-sub {
   margin: 0 0 28px;
@@ -225,9 +226,9 @@ body.landing {
 .offers h2, .proof h2, .close h2, .faq h2 {
   font-family: var(--display);
   font-size: clamp(32px, 4.5vw, 48px);
-  font-weight: 400;
+  font-weight: 750;
   margin: 0 0 12px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.035em;
 }
 .offers-lead, .close-sub {
   color: var(--muted);
@@ -281,8 +282,10 @@ body.landing {
 }
 .plan-card h3 {
   margin: 0 0 6px;
-  font-size: 22px;
-  font-weight: 700;
+  font-family: var(--display);
+  font-size: 24px;
+  font-weight: 750;
+  letter-spacing: -0.03em;
 }
 .plan-tagline {
   margin: 0 0 18px;
@@ -293,8 +296,9 @@ body.landing {
 .plan-price { margin-bottom: 6px; }
 .plan-amount {
   font-family: var(--display);
-  font-size: clamp(36px, 4vw, 48px);
-  letter-spacing: -0.03em;
+  font-size: clamp(40px, 4.5vw, 52px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 .plan-amount.sm { font-size: 32px; display: block; margin-bottom: 12px; }
