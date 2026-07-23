@@ -50,78 +50,87 @@
     </section>
 
     <section class="offers" id="offres">
-      <h2 data-i18n="offers_h2">Gratuit · Audit · Pro</h2>
-      <p class="offers-lead" data-i18n="offers_lead">L’outil te montre où creuser. L’audit te livre le plan prêt à publier ou vendre.</p>
+      <div class="plans-header">
+        <p class="plans-eyebrow" data-i18n="plans_eyebrow">Tarifs & plans</p>
+        <h2 data-i18n="offers_h2">Choisis comment tu veux grandir</h2>
+        <p class="offers-lead" data-i18n="offers_lead">Tout est conçu pour trouver où est l’argent — et livrer un plan actionnable.</p>
+      </div>
 
-      <div class="offer-rows">
+      <div class="plans-grid">
         <!-- FREE -->
-        <article class="offer offer-free">
-          <div class="offer-top">
-            <span class="tier-badge free" data-i18n="tier_free">Gratuit</span>
-            <span class="offer-price" data-i18n="price_free">0 €</span>
+        <article class="plan-card">
+          <h3 data-i18n="offer_free_title">Free</h3>
+          <p class="plan-tagline" data-i18n="offer_free_body">Teste les outils créateur puissants</p>
+          <div class="plan-price">
+            <span class="plan-amount" data-i18n="price_free">0 €</span>
           </div>
-          <h3 data-i18n="offer_free_title">Studio self-serve</h3>
-          <p data-i18n="offer_free_body">Cash Score, Optimize SEO, Scorecard, Idées, extension Chrome. Ta clé YouTube, dans le navigateur.</p>
-          <ul class="offer-list">
+          <p class="plan-billing" data-i18n="billing_free">Outils de base inclus. Upgrade quand tu veux.</p>
+          <a class="plan-cta ghost" href="app.html" data-i18n="offer_free_cta">Commencer gratuitement</a>
+          <ul class="plan-features">
             <li data-i18n="offer_free_1">Studio Cash + niches + tendances</li>
-            <li data-i18n="offer_free_2">Optimize + extension YouTube</li>
-            <li data-i18n="offer_free_3">Compare chaînes & outliers</li>
-            <li data-i18n="offer_free_4">Topic tracker local</li>
+            <li data-i18n="offer_free_2">Optimize SEO + extension Chrome</li>
+            <li data-i18n="offer_free_3">Scorecard concurrents & outliers</li>
+            <li data-i18n="offer_free_4">Idées + topic tracker local</li>
           </ul>
-          <a class="offer-link" href="app.html" data-i18n="offer_free_cta">Ouvrir l’app →</a>
         </article>
 
-        <!-- FLASH -->
-        <article class="offer">
-          <div class="offer-top">
-            <span class="tier-badge audit" data-i18n="tier_audit">Audit</span>
-            <span class="offer-price" data-i18n="price_flash">297 €</span>
+        <!-- FLASH — most popular -->
+        <article class="plan-card featured">
+          <span class="plan-ribbon" data-i18n="ribbon_popular">Le plus populaire</span>
+          <h3 data-i18n="offer_flash_name">Flash</h3>
+          <p class="plan-tagline" data-i18n="offer_flash_body">Audit express pour valider une niche</p>
+          <div class="plan-price">
+            <span class="plan-amount" data-i18n="price_flash">297 €</span>
           </div>
-          <h3 data-i18n="offer_flash_title">Audit Flash — 48–72h</h3>
-          <p data-i18n="offer_flash_body">Idéal pour valider une niche avant de produire. Livrable PDF branded.</p>
-          <ul class="offer-list">
+          <p class="plan-billing" data-i18n="billing_flash">Paiement unique · livré en 48–72h</p>
+          <a class="plan-cta primary" id="cta-flash" href="#contact" data-i18n="offer_flash_cta">Réserver Flash</a>
+          <ul class="plan-features">
             <li data-i18n="offer_flash_1">1 niche cash scorée</li>
             <li data-i18n="offer_flash_2">2 concurrents analysés</li>
             <li data-i18n="offer_flash_3">8 titres + calendrier 2 semaines</li>
-            <li data-i18n="offer_flash_4">PDF prêt à forwarder</li>
+            <li data-i18n="offer_flash_4">PDF branded prêt à forwarder</li>
           </ul>
-          <a class="offer-link" id="cta-flash" href="#contact" data-i18n="offer_flash_cta">Réserver le Flash →</a>
         </article>
 
-        <!-- STUDIO AUDIT -->
-        <article class="offer offer-accent">
-          <div class="offer-top">
-            <span class="tier-badge audit" data-i18n="tier_audit">Audit</span>
-            <span class="offer-price" data-i18n="price_studio">990 €</span>
+        <!-- STUDIO -->
+        <article class="plan-card strong">
+          <span class="plan-ribbon alt" data-i18n="ribbon_powerful">Le plus puissant</span>
+          <h3 data-i18n="offer_studio_name">Studio</h3>
+          <p class="plan-tagline" data-i18n="offer_studio_body">Plan 4 semaines + call stratégie</p>
+          <div class="plan-price">
+            <span class="plan-amount" data-i18n="price_studio">990 €</span>
           </div>
-          <h3 data-i18n="offer_studio_title">Audit Studio — plan 4 semaines</h3>
-          <p data-i18n="offer_studio_body">Pour lancer ou repositionner une chaîne avec un plan actionnable + call.</p>
-          <ul class="offer-list">
+          <p class="plan-billing" data-i18n="billing_studio">Paiement unique · call 45 min inclus</p>
+          <a class="plan-cta primary" id="cta-studio" href="#contact" data-i18n="offer_studio_cta">Réserver Studio</a>
+          <ul class="plan-features">
+            <li data-i18n="offer_studio_plus" class="plan-plus">Tout Flash, plus :</li>
             <li data-i18n="offer_studio_1">3 niches cash + compare chaînes</li>
             <li data-i18n="offer_studio_2">Outliers + patterns gagnants</li>
             <li data-i18n="offer_studio_3">Calendrier 4 semaines + briefs thumbs</li>
             <li data-i18n="offer_studio_4">Call stratégie 45 min</li>
           </ul>
-          <a class="offer-link" id="cta-studio" href="#contact" data-i18n="offer_studio_cta">Réserver le Studio →</a>
         </article>
+      </div>
 
-        <!-- PRO -->
-        <article class="offer offer-pro">
-          <div class="offer-top">
-            <span class="tier-badge pro" data-i18n="tier_pro">Pro</span>
-            <span class="offer-price" data-i18n="price_pro">Sur demande</span>
-          </div>
-          <h3 data-i18n="offer_pro_title">Pro — tracking & agence</h3>
-          <p data-i18n="offer_pro_body">Pour suivre des keywords dans le temps et industrialiser les audits clients.</p>
-          <ul class="offer-list">
+      <!-- PRO / enterprise band -->
+      <aside class="enterprise-band">
+        <div class="enterprise-copy">
+          <span class="tier-badge pro" data-i18n="tier_pro">Pro</span>
+          <h3 data-i18n="offer_pro_title">Pour marques, agences & multi-chaînes</h3>
+          <p data-i18n="offer_pro_body">Contrôle centralisé. Accès scalable. Visibilité complète sur tes keywords.</p>
+          <p class="enterprise-includes" data-i18n="enterprise_includes">Inclus :</p>
+          <ul class="plan-features compact">
             <li data-i18n="offer_pro_1">Rankings + historique + cron quotidien</li>
             <li data-i18n="offer_pro_2">Exports client & branding avancé</li>
             <li data-i18n="offer_pro_3">Pipeline cloud (multi-device)</li>
             <li data-i18n="offer_pro_4">Self-host possible dès aujourd’hui (Supabase)</li>
           </ul>
-          <a class="offer-link" id="cta-pro" href="#contact" data-i18n="offer_pro_cta">Parler Pro →</a>
-        </article>
-      </div>
+        </div>
+        <div class="enterprise-cta">
+          <span class="plan-amount sm" data-i18n="price_pro">Sur demande</span>
+          <a class="plan-cta primary" id="cta-pro" href="#contact" data-i18n="offer_pro_cta">En savoir plus</a>
+        </div>
+      </aside>
     </section>
 
     <section class="proof" id="methode">
