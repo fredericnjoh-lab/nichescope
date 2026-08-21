@@ -22,7 +22,7 @@
       <span class="land-name" id="brand-name">NicheScope</span>
     </a>
     <nav class="land-nav-links">
-      <a href="#usecases" data-i18n="nav_usecases">Cas d’usage</a>
+      <a href="#features" data-i18n="nav_usecases">Cas d’usage</a>
       <a href="#offres" data-i18n="nav_offers">Offres</a>
       <a href="#faq" data-i18n="nav_faq">FAQ</a>
       <a href="app.html" data-i18n="nav_app">Ouvrir l’app</a>
@@ -50,53 +50,99 @@
       </div>
     </section>
 
+    <section class="features" id="features">
+      <div class="features-inner">
+        <p class="uc-icon" aria-hidden="true">✦</p>
+        <h2 data-i18n="feat_h2">Mets ta croissance YouTube en pilote auto</h2>
+        <p class="offers-lead" data-i18n="feat_lead">Trop de créateurs tournent sans savoir où est l’argent. Voici comment NicheScope rend le choix (et le plan) évident.</p>
+
+        <div class="feat-stage">
+          <div class="feat-list" role="tablist" aria-label="Bénéfices">
+            <button type="button" class="feat-item active" role="tab" aria-selected="true" data-feat="studio">
+              <h3 data-i18n="feat_studio_title">Trouve les niches qui paient vraiment</h3>
+              <p data-i18n="feat_studio_body">Cash Score = RPM × demande × facilité. Plus de niches “sexy” mais pauvres.</p>
+            </button>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="seo">
+              <h3 data-i18n="feat_seo_title">Publie avec un score SEO, pas un espoir</h3>
+              <p data-i18n="feat_seo_body">Titres, volume, compétition, opportunity — avant d’appuyer sur Publier.</p>
+            </button>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="scorecard">
+              <h3 data-i18n="feat_score_title">Vole ce qui marche chez les concurrents</h3>
+              <p data-i18n="feat_score_body">Compare chaînes, outliers, efficacité $. Abonnés ≠ revenus.</p>
+            </button>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="rankings">
+              <h3 data-i18n="feat_rank_title">Suis tes keywords pendant que tu dors</h3>
+              <p data-i18n="feat_rank_body">Sparklines + scans quotidiens. Tu sais si tu grimpes vraiment.</p>
+            </button>
+          </div>
+          <div class="feat-visual">
+            <figure class="feat-shot" data-feat-panel="studio">
+              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" loading="lazy" />
+            </figure>
+            <figure class="feat-shot" data-feat-panel="seo" hidden>
+              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" loading="lazy" />
+            </figure>
+            <figure class="feat-shot" data-feat-panel="scorecard" hidden>
+              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" loading="lazy" />
+            </figure>
+            <figure class="feat-shot" data-feat-panel="rankings" hidden>
+              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" loading="lazy" />
+            </figure>
+          </div>
+        </div>
+        <div class="feat-cta-row">
+          <a class="btn-hero primary" href="app.html" data-i18n="cta_studio">Lancer le studio gratuit</a>
+        </div>
+      </div>
+    </section>
+
     <section class="usecases" id="usecases">
       <div class="usecases-inner">
-        <p class="plans-eyebrow" data-i18n="uc_eyebrow">Voir en action</p>
-        <h2 data-i18n="uc_h2">Des cas d’usage concrets — pas de slides marketing</h2>
-        <p class="offers-lead" data-i18n="uc_lead">Comme ManyChat montre ses flows : voici NicheScope sur de vrais scénarios créateur.</p>
+        <p class="uc-icon" aria-hidden="true">▶</p>
+        <h2 data-i18n="uc_h2">Commence à monétiser YouTube aujourd’hui</h2>
+        <p class="offers-lead" data-i18n="uc_lead">Assez de guesswork. On a rendu NicheScope idiotement simple — la plupart des créateurs scannent leur niche en quelques minutes.</p>
+        <p class="uc-howto" data-i18n="uc_howto">Voir comment ça marche</p>
+      </div>
 
-        <div class="uc-tabs" role="tablist" aria-label="Cas d’usage">
-          <button type="button" class="uc-tab active" role="tab" aria-selected="true" data-uc="studio" data-i18n="uc_tab_studio">Trouver une niche cash</button>
-          <button type="button" class="uc-tab" role="tab" aria-selected="false" data-uc="seo" data-i18n="uc_tab_seo">Optimiser avant de publier</button>
-          <button type="button" class="uc-tab" role="tab" aria-selected="false" data-uc="scorecard" data-i18n="uc_tab_scorecard">Battre un concurrent</button>
-          <button type="button" class="uc-tab" role="tab" aria-selected="false" data-uc="rankings" data-i18n="uc_tab_rankings">Tracker ses keywords</button>
-        </div>
+      <div class="uc-band">
+        <div class="uc-band-inner">
+          <aside class="uc-list" role="tablist" aria-label="Cas d’usage">
+            <button type="button" class="uc-item active" role="tab" aria-selected="true" data-uc="studio">
+              <span class="uc-item-title" data-i18n="uc_tab_studio">Trouver une niche cash</span>
+              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+            </button>
+            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="seo">
+              <span class="uc-item-title" data-i18n="uc_tab_seo">Optimiser avant de publier</span>
+              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+            </button>
+            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="scorecard">
+              <span class="uc-item-title" data-i18n="uc_tab_scorecard">Battre un concurrent</span>
+              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+            </button>
+            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="rankings">
+              <span class="uc-item-title" data-i18n="uc_tab_rankings">Tracker ses keywords</span>
+              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+            </button>
+          </aside>
 
-        <div class="uc-stage">
-          <figure class="uc-shot" data-uc-panel="studio">
-            <div class="uc-browser" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <em>app.nichescope / studio</em>
-            </div>
-            <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
-          </figure>
-          <figure class="uc-shot" data-uc-panel="seo" hidden>
-            <div class="uc-browser" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <em>app.nichescope / optimize</em>
-            </div>
-            <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
-          </figure>
-          <figure class="uc-shot" data-uc-panel="scorecard" hidden>
-            <div class="uc-browser" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <em>app.nichescope / scorecard</em>
-            </div>
-            <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
-          </figure>
-          <figure class="uc-shot" data-uc-panel="rankings" hidden>
-            <div class="uc-browser" aria-hidden="true">
-              <span></span><span></span><span></span>
-              <em>app.nichescope / rankings</em>
-            </div>
-            <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
-          </figure>
+          <div class="uc-visual">
+            <figure class="uc-shot" data-uc-panel="studio">
+              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="seo" hidden>
+              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="scorecard" hidden>
+              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="rankings" hidden>
+              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
+            </figure>
+          </div>
 
           <div class="uc-copy">
-            <h3 id="uc-title" data-i18n="uc_studio_title">Scanner une verticale et sortir les niches qui paient</h3>
             <p id="uc-body" data-i18n="uc_studio_body">Entre un thème (ex. finance perso). NicheScope classe les sous-niches par Cash Score — RPM, demande, facilité, affilié — pour savoir où tourner en premier.</p>
-            <a class="btn-hero primary" href="app.html" data-i18n="uc_cta">Essayer dans le studio</a>
+            <a class="uc-cta" href="app.html" data-i18n="uc_cta">Essayer dans le studio</a>
           </div>
         </div>
       </div>

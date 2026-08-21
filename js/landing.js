@@ -26,8 +26,10 @@ const LAND = {
     cta_book: "Voir les audits",
     cta_studio: "Lancer le studio gratuit",
     uc_eyebrow: "Voir en action",
-    uc_h2: "Des cas d’usage concrets — pas de slides marketing",
-    uc_lead: "Comme ManyChat montre ses flows : voici NicheScope sur de vrais scénarios créateur.",
+    uc_h2: "Commence à monétiser YouTube aujourd’hui",
+    uc_lead: "Assez de guesswork. On a rendu NicheScope idiotement simple — la plupart des créateurs scannent leur niche en quelques minutes.",
+    uc_howto: "Voir comment ça marche",
+    uc_check: "Voir →",
     uc_tab_studio: "Trouver une niche cash",
     uc_tab_seo: "Optimiser avant de publier",
     uc_tab_scorecard: "Battre un concurrent",
@@ -45,6 +47,16 @@ const LAND = {
     uc_alt_seo: "Capture NicheScope — Optimize SEO avec score 82",
     uc_alt_scorecard: "Capture NicheScope — Scorecard comparaison de chaînes",
     uc_alt_rankings: "Capture NicheScope — Rankings keywords avec sparklines",
+    feat_h2: "Mets ta croissance YouTube en pilote auto",
+    feat_lead: "Trop de créateurs tournent sans savoir où est l’argent. Voici comment NicheScope rend le choix (et le plan) évident.",
+    feat_studio_title: "Trouve les niches qui paient vraiment",
+    feat_studio_body: "Cash Score = RPM × demande × facilité. Plus de niches “sexy” mais pauvres.",
+    feat_seo_title: "Publie avec un score SEO, pas un espoir",
+    feat_seo_body: "Titres, volume, compétition, opportunity — avant d’appuyer sur Publier.",
+    feat_score_title: "Vole ce qui marche chez les concurrents",
+    feat_score_body: "Compare chaînes, outliers, efficacité $. Abonnés ≠ revenus.",
+    feat_rank_title: "Suis tes keywords pendant que tu dors",
+    feat_rank_body: "Sparklines + scans quotidiens. Tu sais si tu grimpes vraiment.",
     plans_eyebrow: "Tarifs & plans",
     offers_h2: "Choisis comment tu veux grandir",
     offers_lead: "Tout est conçu pour trouver où est l’argent — et livrer un plan actionnable.",
@@ -130,8 +142,10 @@ const LAND = {
     cta_book: "See paid audits",
     cta_studio: "Launch the free studio",
     uc_eyebrow: "See it in action",
-    uc_h2: "Real use cases — not marketing slides",
-    uc_lead: "Like ManyChat shows its flows: here’s NicheScope on real creator scenarios.",
+    uc_h2: "Start monetizing YouTube today",
+    uc_lead: "Enough guesswork. We made NicheScope stupidly easy — most creators scan their niche in minutes.",
+    uc_howto: "See how it works",
+    uc_check: "Check it out →",
     uc_tab_studio: "Find a cash niche",
     uc_tab_seo: "Optimize before publish",
     uc_tab_scorecard: "Beat a competitor",
@@ -149,6 +163,16 @@ const LAND = {
     uc_alt_seo: "NicheScope screenshot — Optimize SEO with score 82",
     uc_alt_scorecard: "NicheScope screenshot — channel Scorecard comparison",
     uc_alt_rankings: "NicheScope screenshot — Rankings keywords with sparklines",
+    feat_h2: "Put YouTube growth on autopilot",
+    feat_lead: "Too many creators shoot without knowing where the money is. Here’s how NicheScope makes the choice (and the plan) obvious.",
+    feat_studio_title: "Find niches that actually pay",
+    feat_studio_body: "Cash Score = RPM × demand × ease. No more sexy-but-broke niches.",
+    feat_seo_title: "Publish with an SEO score, not a hope",
+    feat_seo_body: "Titles, volume, competition, opportunity — before you hit Publish.",
+    feat_score_title: "Steal what works from competitors",
+    feat_score_body: "Compare channels, outliers, $ efficiency. Subs ≠ revenue.",
+    feat_rank_title: "Track keywords while you sleep",
+    feat_rank_body: "Sparklines + daily scans. Know if you’re actually climbing.",
     plans_eyebrow: "Pricing & plans",
     offers_h2: "Choose how you want to grow",
     offers_lead: "Everything built to find where the money is — and deliver an actionable plan.",
@@ -253,8 +277,8 @@ function applyLandingI18n() {
   const btn = document.getElementById("langToggle");
   if (btn) btn.textContent = lt("lang_btn");
 
-  // Keep use-case copy in sync with active tab after lang switch
-  const activeUc = document.querySelector(".uc-tab.active")?.getAttribute("data-uc") || "studio";
+  // Keep use-case / feature copy in sync after lang switch
+  const activeUc = document.querySelector(".uc-item.active")?.getAttribute("data-uc") || "studio";
   applyUseCaseCopy(activeUc);
 }
 
@@ -267,14 +291,24 @@ const UC_COPY = {
 
 function applyUseCaseCopy(id) {
   const keys = UC_COPY[id] || UC_COPY.studio;
-  const title = document.getElementById("uc-title");
   const body = document.getElementById("uc-body");
-  if (title) title.textContent = lt(keys.title);
   if (body) body.textContent = lt(keys.body);
 }
 
+function switchPanels(selector, attr, id) {
+  document.querySelectorAll(selector).forEach(panel => {
+    const on = panel.getAttribute(attr) === id;
+    panel.hidden = !on;
+    if (on) {
+      panel.style.animation = "none";
+      void panel.offsetWidth;
+      panel.style.animation = "";
+    }
+  });
+}
+
 function initUseCases() {
-  const tabs = [...document.querySelectorAll(".uc-tab")];
+  const tabs = [...document.querySelectorAll(".uc-item")];
   if (!tabs.length) return;
 
   const show = (id) => {
@@ -283,21 +317,30 @@ function initUseCases() {
       tab.classList.toggle("active", on);
       tab.setAttribute("aria-selected", on ? "true" : "false");
     });
-    document.querySelectorAll("[data-uc-panel]").forEach(panel => {
-      const on = panel.getAttribute("data-uc-panel") === id;
-      panel.hidden = !on;
-      if (on) {
-        panel.style.animation = "none";
-        // reflow to restart fade
-        void panel.offsetWidth;
-        panel.style.animation = "";
-      }
-    });
+    switchPanels("[data-uc-panel]", "data-uc-panel", id);
     applyUseCaseCopy(id);
   };
 
   tabs.forEach(tab => {
     tab.addEventListener("click", () => show(tab.getAttribute("data-uc")));
+  });
+}
+
+function initFeatures() {
+  const tabs = [...document.querySelectorAll(".feat-item")];
+  if (!tabs.length) return;
+
+  const show = (id) => {
+    tabs.forEach(tab => {
+      const on = tab.getAttribute("data-feat") === id;
+      tab.classList.toggle("active", on);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    switchPanels("[data-feat-panel]", "data-feat-panel", id);
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => show(tab.getAttribute("data-feat")));
   });
 }
 
@@ -382,6 +425,7 @@ function refresh() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
+  initFeatures();
   initUseCases();
   refresh();
   document.getElementById("langToggle")?.addEventListener("click", () => {
