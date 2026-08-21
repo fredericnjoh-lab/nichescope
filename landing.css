@@ -199,6 +199,123 @@ body.landing {
 }
 .btn-hero.ghost:hover { border-color: var(--text); }
 
+/* USE CASES — ManyChat-style “see it in action” + product shots */
+.usecases {
+  padding: 88px 28px 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background:
+    radial-gradient(ellipse 60% 40% at 50% 0%, rgba(225, 29, 55, 0.12), transparent 55%),
+    linear-gradient(180deg, #0a0c11 0%, var(--bg) 100%);
+}
+.usecases-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  text-align: center;
+}
+.usecases .offers-lead {
+  max-width: 52ch;
+  margin: 0 auto 28px;
+}
+.uc-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+.uc-tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 10px 16px;
+  transition: color 0.15s, border-color 0.15s, background 0.15s, transform 0.15s;
+}
+.uc-tab:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.28);
+}
+.uc-tab.active {
+  color: #fff;
+  background: rgba(225, 29, 55, 0.2);
+  border-color: rgba(225, 29, 55, 0.55);
+  box-shadow: 0 0 0 1px rgba(225, 29, 55, 0.2);
+}
+.uc-stage {
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 28px;
+  align-items: center;
+  text-align: left;
+}
+.uc-shot {
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #0f1218;
+  box-shadow:
+    0 24px 60px rgba(0,0,0,0.45),
+    0 0 0 1px rgba(225, 29, 55, 0.08);
+  animation: uc-fade 0.35s ease both;
+}
+.uc-shot[hidden] { display: none; }
+@keyframes uc-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.uc-browser {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #151922;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.uc-browser span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3a4152;
+}
+.uc-browser span:nth-child(1) { background: #ff5f57; }
+.uc-browser span:nth-child(2) { background: #febc2e; }
+.uc-browser span:nth-child(3) { background: #28c840; }
+.uc-browser em {
+  margin-left: 10px;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.uc-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+.uc-copy h3 {
+  font-family: var(--display);
+  font-size: clamp(22px, 3vw, 30px);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px;
+  line-height: 1.15;
+}
+.uc-copy p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+
 /* PLANS — vidIQ-inspired pricing grid, NicheScope red */
 .offers {
   padding: 96px 28px 80px;
@@ -223,7 +340,7 @@ body.landing {
   text-transform: uppercase;
   color: var(--accent-2);
 }
-.offers h2, .proof h2, .close h2, .faq h2 {
+.offers h2, .proof h2, .close h2, .faq h2, .usecases h2 {
   font-family: var(--display);
   font-size: clamp(32px, 4.5vw, 48px);
   font-weight: 750;
@@ -492,7 +609,7 @@ body.landing {
 .land-foot a:hover { color: var(--text); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-atmosphere, .hero-copy, .hero-title, .hero-sub, .hero-cta {
+  .hero-atmosphere, .hero-copy, .hero-title, .hero-sub, .hero-cta, .uc-shot {
     animation: none !important;
   }
 }
@@ -501,6 +618,10 @@ body.landing {
   .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .plan-card.featured { transform: none; }
   .enterprise-band { grid-template-columns: 1fr; }
+  .uc-stage { grid-template-columns: 1fr; }
+  .uc-copy { order: -1; text-align: center; }
+  .uc-copy p { margin-left: auto; margin-right: auto; }
+  .uc-copy .btn-hero { width: 100%; max-width: 320px; }
 }
 
 @media (max-width: 640px) {
@@ -508,7 +629,9 @@ body.landing {
   .land-nav-links a:not(.land-nav-cta) { display: none; }
   .hero { padding: 0 16px 10vh; align-items: center; }
   .hero-brand { font-size: clamp(42px, 14vw, 72px); }
-  .offers, .proof, .faq, .close { padding: 56px 16px; }
+  .offers, .proof, .faq, .close, .usecases { padding: 56px 16px; }
+  .uc-tabs { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  .uc-tab { flex: 0 0 auto; }
   .enterprise-band { padding: 22px; }
   .btn-hero { width: 100%; }
 }

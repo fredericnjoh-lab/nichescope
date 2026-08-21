@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NicheScope product shots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #080a0e;
+      --surface: #0f1218;
+      --surface-2: #171b24;
+      --border: #262c3a;
+      --text: #f4f6fa;
+      --muted: #9299ad;
+      --accent: #e11d37;
+      --accent-2: #ff4d63;
+      --cash: #4ade80;
+      --font: "Plus Jakarta Sans", sans-serif;
+      --display: "Syne", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #111;
+      font-family: var(--font);
+      color: var(--text);
+    }
+    .shot {
+      width: 1280px;
+      height: 800px;
+      margin: 24px auto;
+      background:
+        radial-gradient(ellipse 70% 45% at 90% -5%, rgba(225, 29, 55, 0.2), transparent 50%),
+        linear-gradient(180deg, #0c0f15 0%, var(--bg) 42%);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      display: none;
+      flex-direction: column;
+    }
+    .shot.show { display: flex; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(15,18,24,0.85);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .logo {
+      width: 34px; height: 34px; border-radius: 10px;
+      background: linear-gradient(135deg, var(--accent), #8b1020);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 12px;
+    }
+    .brand h1 {
+      margin: 0; font-family: var(--display); font-size: 18px; font-weight: 750; letter-spacing: -0.03em;
+    }
+    .brand span { color: var(--muted); font-size: 12px; display: block; }
+    .tabs {
+      display: flex; gap: 6px; padding: 12px 18px; border-bottom: 1px solid var(--border);
+      background: rgba(15,18,24,0.5); flex-wrap: wrap;
+    }
+    .tab {
+      padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 650;
+      color: var(--muted); border: 1px solid transparent; background: transparent;
+    }
+    .tab.on {
+      color: #fff; background: rgba(225,29,55,0.18); border-color: rgba(225,29,55,0.45);
+    }
+    .body { padding: 22px 26px; flex: 1; overflow: hidden; }
+    .panel-h2 {
+      font-family: var(--display); font-size: 28px; margin: 0 0 6px;
+      letter-spacing: -0.035em; font-weight: 750; line-height: 1.1;
+    }
+    .panel-h2.grad {
+      background: linear-gradient(105deg, var(--text) 35%, var(--accent-2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .panel-p { margin: 0 0 18px; color: var(--muted); font-size: 14px; max-width: 58ch; }
+    .form {
+      display: flex; gap: 8px; margin-bottom: 20px;
+    }
+    .form input, .form select {
+      flex: 1; padding: 11px 14px; border-radius: 10px;
+      border: 1px solid var(--border); background: var(--surface); color: var(--text); font: inherit;
+    }
+    .form select { flex: 0 0 140px; }
+    .btn {
+      padding: 11px 18px; border: none; border-radius: 10px;
+      background: var(--accent); color: #fff; font-weight: 700; font-size: 13px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
+    }
+    .card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+    .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .chip {
+      font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 999px;
+      background: var(--surface-2); color: var(--muted);
+    }
+    .chip.cash { background: rgba(74,222,128,0.12); color: var(--cash); }
+    .chip.hot { background: rgba(225,29,55,0.15); color: var(--accent-2); }
+    .score {
+      font-family: var(--display); font-size: 32px; font-weight: 800; letter-spacing: -0.04em;
+    }
+    .score small { font-size: 12px; color: var(--muted); font-family: var(--font); font-weight: 600; display: block; }
+    .rows { display: flex; flex-direction: column; gap: 8px; }
+    .row {
+      display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: center;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px;
+    }
+    .row strong { font-size: 14px; }
+    .row .muted { color: var(--muted); font-size: 12px; }
+    .seo-board {
+      display: grid; grid-template-columns: 1.2fr repeat(3, 1fr); gap: 12px; margin-bottom: 16px;
+    }
+    .seo-big {
+      background: radial-gradient(ellipse 90% 70% at 50% 0%, rgba(225,29,55,0.18), transparent 60%), var(--surface);
+      border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--border));
+      border-radius: 14px; padding: 18px; text-align: center;
+    }
+    .seo-val {
+      font-family: var(--display); font-size: 56px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; margin: 6px 0;
+      color: var(--cash);
+    }
+    .stat { text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; }
+    .stat .v { font-family: var(--display); font-size: 26px; font-weight: 750; letter-spacing: -0.03em; margin-top: 4px; }
+    .stat .l { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 650; }
+    .titles { display: grid; gap: 8px; }
+    .title-item {
+      display: flex; justify-content: space-between; gap: 12px; align-items: center;
+      padding: 12px 14px; border-radius: 12px; background: var(--surface); border: 1px solid var(--border);
+    }
+    .spark {
+      width: 88px; height: 28px;
+    }
+    .spark polyline { fill: none; stroke: var(--cash); stroke-width: 2; }
+    .label-up { color: var(--cash); font-weight: 700; font-size: 12px; }
+    .label-down { color: var(--accent-2); font-weight: 700; font-size: 12px; }
+    .compare {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 14px;
+    }
+    .channel {
+      display: flex; gap: 12px; align-items: center; padding: 14px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    }
+    .av {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: linear-gradient(135deg, #333, #111); border: 2px solid var(--border);
+      display: grid; place-items: center; font-weight: 800; color: var(--muted);
+    }
+    .channel h3 { margin: 0; font-size: 16px; }
+    .channel p { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+    .bars { display: grid; gap: 10px; }
+    .bar-row { display: grid; grid-template-columns: 140px 1fr 60px; gap: 10px; align-items: center; font-size: 13px; }
+    .bar-track { height: 8px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; }
+    .bar-fill.g { background: linear-gradient(90deg, #15803d, var(--cash)); }
+  </style>
+</head>
+<body>
+  <!-- 1 STUDIO CASH -->
+  <section class="shot show" id="shot-studio" data-shot="studio">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div>
+          <h1>NicheScope</h1>
+          <span>Trouve les niches YouTube qui rapportent</span>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <span class="tab on">Studio Cash</span>
+      <span class="tab">Niches</span>
+      <span class="tab">Optimize</span>
+      <span class="tab">Scorecard</span>
+      <span class="tab">Rankings</span>
+    </div>
+    <div class="body">
+      <h2 class="panel-h2 grad">Ton studio YouTube — niches qui monétisent</h2>
+      <p class="panel-p">Sous-niches scorées par potentiel AdSense + affilié. Classe-les et lance ton pipeline.</p>
+      <div class="form">
+        <input value="finance personnelle France" readonly />
+        <select><option>France</option></select>
+        <button class="btn">Scanner</button>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="meta"><span class="chip cash">Cash 86</span><span class="chip hot">RPM élevé</span></div>
+          <h3>Budgeting apps FR</h3>
+          <div class="score">86<small>Cash Score</small></div>
+          <p class="muted" style="color:var(--muted);font-size:12px;margin:8px 0 0;">Demande ★★★★ · Concurrence moyenne · Affilié fort</p>
+        </article>
+        <article class="card">
+          <div class="meta"><span class="chip cash">Cash 79</span><span class="chip">Facile</span></div>
+          <h3>Impôts &amp; micro-entreprise</h3>
+          <div class="score">79<small>Cash Score</small></div>
+          <p style="color:var(--muted);font-size:12px;margin:8px 0 0;">Saisonnalité Q1 · CPA Elevato / Legalstart</p>
+        </article>
+        <article class="card">
+          <div class="meta"><span class="chip cash">Cash 74</span><span class="chip">Outliers</span></div>
+          <h3>Investir en ETF</h3>
+          <div class="score">74<small>Cash Score</small></div>
+          <p style="color:var(--muted);font-size:12px;margin:8px 0 0;">3 chaînes &lt;50k abonnés à 40k vues/vid</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 OPTIMIZE SEO -->
+  <section class="shot" id="shot-seo" data-shot="seo">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div><h1>NicheScope</h1><span>Optimize SEO vidéo</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <span class="tab">Studio Cash</span>
+      <span class="tab on">Optimize</span>
+      <span class="tab">Scorecard</span>
+      <span class="tab">Idées</span>
+      <span class="tab">Rankings</span>
+    </div>
+    <div class="body">
+      <h2 class="panel-h2">Optimize — score SEO avant publication</h2>
+      <p class="panel-p">Titres, tags, description et questions saturées — comme un check vidIQ, en rouge NicheScope.</p>
+      <div class="form">
+        <input value="meilleure app budget 2026" readonly />
+        <button class="btn">Analyser</button>
+      </div>
+      <div class="seo-board">
+        <div class="seo-big">
+          <div class="l" style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-weight:650;">Score SEO</div>
+          <div class="seo-val">82</div>
+          <div style="color:var(--cash);font-weight:700;font-size:13px;">Prêt à publier</div>
+        </div>
+        <div class="stat"><div class="l">Compétition</div><div class="v" style="color:#e8a317;">Moyen</div></div>
+        <div class="stat"><div class="l">Volume</div><div class="v">12.4k</div></div>
+        <div class="stat"><div class="l">Opportunity</div><div class="v" style="color:var(--cash);">Élevée</div></div>
+      </div>
+      <div class="titles">
+        <div class="title-item"><span>J’ai testé 7 apps budget — voici la seule qui marche (2026)</span><span class="chip cash">92</span></div>
+        <div class="title-item"><span>App budget gratuite : stop aux frais cachés</span><span class="chip cash">88</span></div>
+        <div class="title-item"><span>Comment gérer son argent en 15 min / semaine</span><span class="chip">81</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 SCORECARD -->
+  <section class="shot" id="shot-scorecard" data-shot="scorecard">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div><h1>NicheScope</h1><span>Scorecard concurrents</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <span class="tab">Studio Cash</span>
+      <span class="tab">Optimize</span>
+      <span class="tab on">Scorecard</span>
+      <span class="tab">Outliers</span>
+      <span class="tab">Rankings</span>
+    </div>
+    <div class="body">
+      <h2 class="panel-h2">Compare 2 chaînes — qui gagne vraiment ?</h2>
+      <p class="panel-p">Abonnés, RPM estimé, outliers et efficacité $ — pour savoir qui prendre comme modèle.</p>
+      <div class="compare">
+        <div class="channel">
+          <div class="av">AF</div>
+          <div>
+            <h3>Argent Facile</h3>
+            <p>184k abonnés · ~€4.2k/mois est.</p>
+          </div>
+        </div>
+        <div class="channel">
+          <div class="av">BP</div>
+          <div>
+            <h3>Budget Pro</h3>
+            <p>61k abonnés · ~€3.8k/mois est.</p>
+          </div>
+        </div>
+      </div>
+      <div class="bars">
+        <div class="bar-row"><span>Vues / vidéo</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><strong>18.2k</strong></div>
+        <div class="bar-row"><span>Efficacité $</span><div class="bar-track"><div class="bar-fill g" style="width:91%"></div></div><strong>91</strong></div>
+        <div class="bar-row"><span>Outliers (30j)</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div><strong>7</strong></div>
+        <div class="bar-row"><span>Upload cadence</span><div class="bar-track"><div class="bar-fill g" style="width:80%"></div></div><strong>3/sem</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 RANKINGS -->
+  <section class="shot" id="shot-rankings" data-shot="rankings">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">NS</div>
+        <div><h1>NicheScope</h1><span>Rankings keywords</span></div>
+      </div>
+    </div>
+    <div class="tabs">
+      <span class="tab">Studio Cash</span>
+      <span class="tab">Optimize</span>
+      <span class="tab">Scorecard</span>
+      <span class="tab on">Rankings</span>
+      <span class="tab">Idées</span>
+    </div>
+    <div class="body">
+      <h2 class="panel-h2">Tes keywords dans le temps</h2>
+      <p class="panel-p">Scan quotidien, sparklines, alertes stale — pour voir si tu grimpes vraiment.</p>
+      <div class="rows">
+        <div class="row">
+          <div><strong>meilleure app budget</strong><div class="muted">FR · suivi depuis 18j</div></div>
+          <svg class="spark" viewBox="0 0 88 28"><polyline points="0,22 12,20 24,18 36,14 48,16 60,10 72,8 88,4"/></svg>
+          <div style="text-align:right"><div style="font-family:var(--display);font-size:22px;font-weight:800">#4</div><div class="label-up">↑ 3</div></div>
+        </div>
+        <div class="row">
+          <div><strong>investir etf débutant</strong><div class="muted">FR · suivi depuis 32j</div></div>
+          <svg class="spark" viewBox="0 0 88 28"><polyline points="0,8 12,10 24,9 36,12 48,11 60,14 72,13 88,12"/></svg>
+          <div style="text-align:right"><div style="font-family:var(--display);font-size:22px;font-weight:800">#11</div><div class="label-down">↓ 1</div></div>
+        </div>
+        <div class="row">
+          <div><strong>micro entreprise impôts</strong><div class="muted">FR · suivi depuis 12j</div></div>
+          <svg class="spark" viewBox="0 0 88 28"><polyline points="0,24 12,22 24,18 36,16 48,12 60,10 72,6 88,5"/></svg>
+          <div style="text-align:right"><div style="font-family:var(--display);font-size:22px;font-weight:800">#7</div><div class="label-up">↑ 6</div></div>
+        </div>
+        <div class="row">
+          <div><strong>side hustle france</strong><div class="muted">FR · suivi depuis 9j</div></div>
+          <svg class="spark" viewBox="0 0 88 28"><polyline points="0,14 12,15 24,13 36,16 48,12 60,11 72,9 88,7"/></svg>
+          <div style="text-align:right"><div style="font-family:var(--display);font-size:22px;font-weight:800">#19</div><div class="label-up">↑ 2</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const params = new URLSearchParams(location.search);
+    const id = params.get("shot") || "studio";
+    document.querySelectorAll(".shot").forEach(el => {
+      el.classList.toggle("show", el.dataset.shot === id);
+    });
+  </script>
+</body>
+</html>

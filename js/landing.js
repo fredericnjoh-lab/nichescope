@@ -14,6 +14,7 @@ function safeStrongHtml(s) {
 const LAND = {
   fr: {
     skip: "Contenu",
+    nav_usecases: "Cas d’usage",
     nav_offers: "Offres",
     nav_faq: "FAQ",
     nav_app: "Ouvrir l’app",
@@ -24,6 +25,26 @@ const LAND = {
     hero_sub: "L’outil gratuit pour creuser. L’audit payant pour livrer le plan.",
     cta_book: "Voir les audits",
     cta_studio: "Lancer le studio gratuit",
+    uc_eyebrow: "Voir en action",
+    uc_h2: "Des cas d’usage concrets — pas de slides marketing",
+    uc_lead: "Comme ManyChat montre ses flows : voici NicheScope sur de vrais scénarios créateur.",
+    uc_tab_studio: "Trouver une niche cash",
+    uc_tab_seo: "Optimiser avant de publier",
+    uc_tab_scorecard: "Battre un concurrent",
+    uc_tab_rankings: "Tracker ses keywords",
+    uc_studio_title: "Scanner une verticale et sortir les niches qui paient",
+    uc_studio_body: "Entre un thème (ex. finance perso). NicheScope classe les sous-niches par Cash Score — RPM, demande, facilité, affilié — pour savoir où tourner en premier.",
+    uc_seo_title: "Scorer ton SEO avant d’appuyer sur Publier",
+    uc_seo_body: "Titres, volume, compétition, opportunity score. Des suggestions prêtes à coller — le réflexe vidIQ, dans la charte NicheScope.",
+    uc_scorecard_title: "Comparer deux chaînes et voler ce qui marche",
+    uc_scorecard_body: "Vues/vidéo, efficacité $, outliers, cadence. Tu vois qui monétise vraiment — pas juste qui a le plus d’abonnés.",
+    uc_rankings_title: "Suivre tes keywords jour après jour",
+    uc_rankings_body: "Sparklines, positions, deltas. Tu sais si tu grimpes, stagnes, ou si un concurrent te dépasse — idéal Pro / agence.",
+    uc_cta: "Essayer dans le studio",
+    uc_alt_studio: "Capture NicheScope — Studio Cash avec niches scorées",
+    uc_alt_seo: "Capture NicheScope — Optimize SEO avec score 82",
+    uc_alt_scorecard: "Capture NicheScope — Scorecard comparaison de chaînes",
+    uc_alt_rankings: "Capture NicheScope — Rankings keywords avec sparklines",
     plans_eyebrow: "Tarifs & plans",
     offers_h2: "Choisis comment tu veux grandir",
     offers_lead: "Tout est conçu pour trouver où est l’argent — et livrer un plan actionnable.",
@@ -97,6 +118,7 @@ const LAND = {
   },
   en: {
     skip: "Content",
+    nav_usecases: "Use cases",
     nav_offers: "Offers",
     nav_faq: "FAQ",
     nav_app: "Open app",
@@ -107,6 +129,26 @@ const LAND = {
     hero_sub: "The free tool to dig. The paid audit to deliver the plan.",
     cta_book: "See paid audits",
     cta_studio: "Launch the free studio",
+    uc_eyebrow: "See it in action",
+    uc_h2: "Real use cases — not marketing slides",
+    uc_lead: "Like ManyChat shows its flows: here’s NicheScope on real creator scenarios.",
+    uc_tab_studio: "Find a cash niche",
+    uc_tab_seo: "Optimize before publish",
+    uc_tab_scorecard: "Beat a competitor",
+    uc_tab_rankings: "Track your keywords",
+    uc_studio_title: "Scan a vertical and surface niches that pay",
+    uc_studio_body: "Enter a theme (e.g. personal finance). NicheScope ranks sub-niches by Cash Score — RPM, demand, ease, affiliate — so you know what to shoot first.",
+    uc_seo_title: "Score your SEO before you hit Publish",
+    uc_seo_body: "Titles, volume, competition, opportunity score. Paste-ready suggestions — the vidIQ reflex, in NicheScope red.",
+    uc_scorecard_title: "Compare two channels and steal what works",
+    uc_scorecard_body: "Views/video, $ efficiency, outliers, cadence. See who actually monetizes — not just who has more subs.",
+    uc_rankings_title: "Watch your keywords day after day",
+    uc_rankings_body: "Sparklines, positions, deltas. Know if you’re climbing, stalling, or losing ground — built for Pro / agencies.",
+    uc_cta: "Try it in the studio",
+    uc_alt_studio: "NicheScope screenshot — Cash Studio with scored niches",
+    uc_alt_seo: "NicheScope screenshot — Optimize SEO with score 82",
+    uc_alt_scorecard: "NicheScope screenshot — channel Scorecard comparison",
+    uc_alt_rankings: "NicheScope screenshot — Rankings keywords with sparklines",
     plans_eyebrow: "Pricing & plans",
     offers_h2: "Choose how you want to grow",
     offers_lead: "Everything built to find where the money is — and deliver an actionable plan.",
@@ -203,9 +245,60 @@ function applyLandingI18n() {
     const key = el.getAttribute("data-i18n-html");
     if (key) el.innerHTML = safeStrongHtml(lt(key));
   });
+  document.querySelectorAll("[data-i18n-alt]").forEach(el => {
+    const key = el.getAttribute("data-i18n-alt");
+    if (key) el.setAttribute("alt", lt(key));
+  });
 
   const btn = document.getElementById("langToggle");
   if (btn) btn.textContent = lt("lang_btn");
+
+  // Keep use-case copy in sync with active tab after lang switch
+  const activeUc = document.querySelector(".uc-tab.active")?.getAttribute("data-uc") || "studio";
+  applyUseCaseCopy(activeUc);
+}
+
+const UC_COPY = {
+  studio: { title: "uc_studio_title", body: "uc_studio_body" },
+  seo: { title: "uc_seo_title", body: "uc_seo_body" },
+  scorecard: { title: "uc_scorecard_title", body: "uc_scorecard_body" },
+  rankings: { title: "uc_rankings_title", body: "uc_rankings_body" },
+};
+
+function applyUseCaseCopy(id) {
+  const keys = UC_COPY[id] || UC_COPY.studio;
+  const title = document.getElementById("uc-title");
+  const body = document.getElementById("uc-body");
+  if (title) title.textContent = lt(keys.title);
+  if (body) body.textContent = lt(keys.body);
+}
+
+function initUseCases() {
+  const tabs = [...document.querySelectorAll(".uc-tab")];
+  if (!tabs.length) return;
+
+  const show = (id) => {
+    tabs.forEach(tab => {
+      const on = tab.getAttribute("data-uc") === id;
+      tab.classList.toggle("active", on);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    document.querySelectorAll("[data-uc-panel]").forEach(panel => {
+      const on = panel.getAttribute("data-uc-panel") === id;
+      panel.hidden = !on;
+      if (on) {
+        panel.style.animation = "none";
+        // reflow to restart fade
+        void panel.offsetWidth;
+        panel.style.animation = "";
+      }
+    });
+    applyUseCaseCopy(id);
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => show(tab.getAttribute("data-uc")));
+  });
 }
 
 function wireOfferLink(el, { cal, mail, offer, fallback }) {
@@ -289,6 +382,7 @@ function refresh() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
+  initUseCases();
   refresh();
   document.getElementById("langToggle")?.addEventListener("click", () => {
     setLang(getLang() === "fr" ? "en" : "fr");
