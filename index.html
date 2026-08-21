@@ -57,36 +57,48 @@
         <p class="offers-lead" data-i18n="feat_lead">Trop de créateurs tournent sans savoir où est l’argent. Voici comment NicheScope rend le choix (et le plan) évident.</p>
 
         <div class="feat-stage">
-          <div class="feat-list" role="tablist" aria-label="Bénéfices">
-            <button type="button" class="feat-item active" role="tab" aria-selected="true" data-feat="studio">
-              <h3 data-i18n="feat_studio_title">Trouve les niches qui paient vraiment</h3>
-              <p data-i18n="feat_studio_body">Cash Score = RPM × demande × facilité. Plus de niches “sexy” mais pauvres.</p>
+          <div class="feat-list" role="tablist" aria-label="Bénéfices" id="feat-tabs">
+            <button type="button" class="feat-item active" role="tab" aria-selected="true" aria-controls="feat-panel-studio" id="feat-tab-studio" data-feat="studio">
+              <span class="feat-num" aria-hidden="true">01</span>
+              <span class="feat-text">
+                <h3 data-i18n="feat_studio_title">Trouve les niches qui paient vraiment</h3>
+                <p data-i18n="feat_studio_body">Cash Score = RPM × demande × facilité. Plus de niches “sexy” mais pauvres.</p>
+              </span>
             </button>
-            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="seo">
-              <h3 data-i18n="feat_seo_title">Publie avec un score SEO, pas un espoir</h3>
-              <p data-i18n="feat_seo_body">Titres, volume, compétition, opportunity — avant d’appuyer sur Publier.</p>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" aria-controls="feat-panel-seo" id="feat-tab-seo" data-feat="seo">
+              <span class="feat-num" aria-hidden="true">02</span>
+              <span class="feat-text">
+                <h3 data-i18n="feat_seo_title">Publie avec un score SEO, pas un espoir</h3>
+                <p data-i18n="feat_seo_body">Titres, volume, compétition, opportunity — avant d’appuyer sur Publier.</p>
+              </span>
             </button>
-            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="scorecard">
-              <h3 data-i18n="feat_score_title">Vole ce qui marche chez les concurrents</h3>
-              <p data-i18n="feat_score_body">Compare chaînes, outliers, efficacité $. Abonnés ≠ revenus.</p>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" aria-controls="feat-panel-scorecard" id="feat-tab-scorecard" data-feat="scorecard">
+              <span class="feat-num" aria-hidden="true">03</span>
+              <span class="feat-text">
+                <h3 data-i18n="feat_score_title">Vole ce qui marche chez les concurrents</h3>
+                <p data-i18n="feat_score_body">Compare chaînes, outliers, efficacité $. Abonnés ≠ revenus.</p>
+              </span>
             </button>
-            <button type="button" class="feat-item" role="tab" aria-selected="false" data-feat="rankings">
-              <h3 data-i18n="feat_rank_title">Suis tes keywords pendant que tu dors</h3>
-              <p data-i18n="feat_rank_body">Sparklines + scans quotidiens. Tu sais si tu grimpes vraiment.</p>
+            <button type="button" class="feat-item" role="tab" aria-selected="false" aria-controls="feat-panel-rankings" id="feat-tab-rankings" data-feat="rankings">
+              <span class="feat-num" aria-hidden="true">04</span>
+              <span class="feat-text">
+                <h3 data-i18n="feat_rank_title">Suis tes keywords pendant que tu dors</h3>
+                <p data-i18n="feat_rank_body">Sparklines + scans quotidiens. Tu sais si tu grimpes vraiment.</p>
+              </span>
             </button>
           </div>
-          <div class="feat-visual">
-            <figure class="feat-shot" data-feat-panel="studio">
-              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" loading="lazy" />
+          <div class="feat-visual" aria-live="polite">
+            <figure class="feat-shot is-active" data-feat-panel="studio" id="feat-panel-studio">
+              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
             </figure>
-            <figure class="feat-shot" data-feat-panel="seo" hidden>
-              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" loading="lazy" />
+            <figure class="feat-shot" data-feat-panel="seo" id="feat-panel-seo">
+              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
             </figure>
-            <figure class="feat-shot" data-feat-panel="scorecard" hidden>
-              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" loading="lazy" />
+            <figure class="feat-shot" data-feat-panel="scorecard" id="feat-panel-scorecard">
+              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
             </figure>
-            <figure class="feat-shot" data-feat-panel="rankings" hidden>
-              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" loading="lazy" />
+            <figure class="feat-shot" data-feat-panel="rankings" id="feat-panel-rankings">
+              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
             </figure>
           </div>
         </div>
@@ -99,50 +111,51 @@
     <section class="usecases" id="usecases">
       <div class="usecases-inner">
         <p class="uc-icon" aria-hidden="true">▶</p>
-        <h2 data-i18n="uc_h2">Commence à monétiser YouTube aujourd’hui</h2>
+        <h2 data-i18n="uc_howto">Voir comment ça marche</h2>
         <p class="offers-lead" data-i18n="uc_lead">Assez de guesswork. On a rendu NicheScope idiotement simple — la plupart des créateurs scannent leur niche en quelques minutes.</p>
-        <p class="uc-howto" data-i18n="uc_howto">Voir comment ça marche</p>
       </div>
 
-      <div class="uc-band">
+      <div class="uc-band" id="uc-band">
         <div class="uc-band-inner">
-          <aside class="uc-list" role="tablist" aria-label="Cas d’usage">
-            <button type="button" class="uc-item active" role="tab" aria-selected="true" data-uc="studio">
-              <span class="uc-item-title" data-i18n="uc_tab_studio">Trouver une niche cash</span>
-              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
-            </button>
-            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="seo">
-              <span class="uc-item-title" data-i18n="uc_tab_seo">Optimiser avant de publier</span>
-              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
-            </button>
-            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="scorecard">
-              <span class="uc-item-title" data-i18n="uc_tab_scorecard">Battre un concurrent</span>
-              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
-            </button>
-            <button type="button" class="uc-item" role="tab" aria-selected="false" data-uc="rankings">
-              <span class="uc-item-title" data-i18n="uc_tab_rankings">Tracker ses keywords</span>
-              <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
-            </button>
-          </aside>
-
-          <div class="uc-visual">
-            <figure class="uc-shot" data-uc-panel="studio">
-              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="seo" hidden>
-              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="scorecard" hidden>
-              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="rankings" hidden>
-              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
-            </figure>
+          <div class="uc-side">
+            <aside class="uc-list" role="tablist" aria-label="Cas d’usage" id="uc-tabs">
+              <button type="button" class="uc-item active" role="tab" aria-selected="true" aria-controls="uc-panel-studio" id="uc-tab-studio" data-uc="studio">
+                <span class="uc-item-title" data-i18n="uc_tab_studio">Trouver une niche cash</span>
+                <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+              </button>
+              <button type="button" class="uc-item" role="tab" aria-selected="false" aria-controls="uc-panel-seo" id="uc-tab-seo" data-uc="seo">
+                <span class="uc-item-title" data-i18n="uc_tab_seo">Optimiser avant de publier</span>
+                <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+              </button>
+              <button type="button" class="uc-item" role="tab" aria-selected="false" aria-controls="uc-panel-scorecard" id="uc-tab-scorecard" data-uc="scorecard">
+                <span class="uc-item-title" data-i18n="uc_tab_scorecard">Battre un concurrent</span>
+                <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+              </button>
+              <button type="button" class="uc-item" role="tab" aria-selected="false" aria-controls="uc-panel-rankings" id="uc-tab-rankings" data-uc="rankings">
+                <span class="uc-item-title" data-i18n="uc_tab_rankings">Tracker ses keywords</span>
+                <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
+              </button>
+            </aside>
+            <div class="uc-copy">
+              <h3 id="uc-title" data-i18n="uc_studio_title">Scanner une verticale et sortir les niches qui paient</h3>
+              <p id="uc-body" data-i18n="uc_studio_body">Entre un thème (ex. finance perso). NicheScope classe les sous-niches par Cash Score — RPM, demande, facilité, affilié — pour savoir où tourner en premier.</p>
+              <a class="uc-cta" href="app.html" data-i18n="uc_cta">Essayer dans le studio</a>
+            </div>
           </div>
 
-          <div class="uc-copy">
-            <p id="uc-body" data-i18n="uc_studio_body">Entre un thème (ex. finance perso). NicheScope classe les sous-niches par Cash Score — RPM, demande, facilité, affilié — pour savoir où tourner en premier.</p>
-            <a class="uc-cta" href="app.html" data-i18n="uc_cta">Essayer dans le studio</a>
+          <div class="uc-visual" aria-live="polite">
+            <figure class="uc-shot is-active" data-uc-panel="studio" id="uc-panel-studio">
+              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="seo" id="uc-panel-seo">
+              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="scorecard" id="uc-panel-scorecard">
+              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
+            </figure>
+            <figure class="uc-shot" data-uc-panel="rankings" id="uc-panel-rankings">
+              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
+            </figure>
           </div>
         </div>
       </div>
@@ -281,6 +294,6 @@
     <a href="https://github.com/fredericnjoh-lab/nichescope" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
-  <script type="module" src="js/landing.js"></script>
+  <script type="module" src="js/landing.js?v=20260821"></script>
 </body>
 </html>

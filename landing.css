@@ -199,7 +199,7 @@ body.landing {
 }
 .btn-hero.ghost:hover { border-color: var(--text); }
 
-/* FEATURES + USE CASES — ManyChat Instagram product page pattern */
+/* FEATURES + USE CASES — polished ManyChat-style UX */
 .features {
   padding: 96px 28px 72px;
   border-top: 1px solid rgba(255,255,255,0.06);
@@ -212,7 +212,7 @@ body.landing {
 .features .offers-lead,
 .usecases .offers-lead {
   max-width: 52ch;
-  margin: 0 auto 36px;
+  margin: 0 auto 40px;
 }
 .uc-icon {
   margin: 0 auto 14px;
@@ -223,12 +223,12 @@ body.landing {
   place-items: center;
   background: rgba(225, 29, 55, 0.18);
   color: var(--accent-2);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 800;
 }
 .offers h2, .proof h2, .close h2, .faq h2, .usecases h2, .features h2 {
   font-family: var(--display);
-  font-size: clamp(32px, 4.5vw, 48px);
+  font-size: clamp(30px, 4.2vw, 46px);
   font-weight: 750;
   margin: 0 0 12px;
   letter-spacing: -0.035em;
@@ -236,16 +236,18 @@ body.landing {
 
 .feat-stage {
   display: grid;
-  grid-template-columns: 0.95fr 1.15fr;
-  gap: 28px;
-  align-items: stretch;
+  grid-template-columns: minmax(280px, 0.92fr) minmax(0, 1.18fr);
+  gap: 32px;
+  align-items: start;
   text-align: left;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
 }
 .feat-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  position: sticky;
+  top: 88px;
 }
 .feat-item {
   appearance: none;
@@ -256,90 +258,128 @@ body.landing {
   background: transparent;
   border: 1px solid transparent;
   border-radius: 14px;
-  padding: 16px 18px;
-  transition: background 0.15s, border-color 0.15s;
+  padding: 14px 16px;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 12px;
+  align-items: start;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.feat-item:hover { background: rgba(255,255,255,0.03); }
+.feat-item:hover { background: rgba(255,255,255,0.035); }
+.feat-item:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 2px;
+}
 .feat-item.active {
   background: rgba(225, 29, 55, 0.1);
-  border-color: rgba(225, 29, 55, 0.4);
+  border-color: rgba(225, 29, 55, 0.45);
+  box-shadow: inset 3px 0 0 var(--accent);
 }
-.feat-item h3 {
-  margin: 0 0 6px;
+.feat-num {
   font-family: var(--display);
-  font-size: 18px;
+  font-size: 13px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  padding-top: 3px;
+}
+.feat-item.active .feat-num { color: var(--accent-2); }
+.feat-item h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 17px;
   font-weight: 750;
   letter-spacing: -0.025em;
+  line-height: 1.25;
+  color: rgba(242,244,248,0.72);
 }
+.feat-item.active h3 { color: var(--text); }
 .feat-item p {
   margin: 0;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13.5px;
   line-height: 1.45;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.25s ease, opacity 0.2s ease, margin 0.2s;
+  transition: max-height 0.28s ease, opacity 0.2s ease, margin 0.2s;
 }
 .feat-item.active p {
-  max-height: 120px;
+  max-height: 96px;
   opacity: 1;
-  margin-top: 2px;
+  margin-top: 8px;
 }
-.feat-visual {
+
+.feat-visual,
+.uc-visual {
   position: relative;
-  min-height: 320px;
-}
-.feat-shot {
-  margin: 0;
   border-radius: 16px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.12);
+  background: #0f1218;
   box-shadow: 0 28px 70px rgba(0,0,0,0.45);
-  animation: uc-fade 0.35s ease both;
+  aspect-ratio: 16 / 10;
 }
-.feat-shot[hidden], .uc-shot[hidden] { display: none; }
-.feat-shot img, .uc-shot img {
+.feat-shot,
+.uc-shot {
+  margin: 0;
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateY(6px) scale(0.99);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+}
+.feat-shot.is-active,
+.uc-shot.is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  z-index: 1;
+}
+.feat-shot img,
+.uc-shot img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: top left;
 }
 .feat-cta-row { display: flex; justify-content: center; }
 
-/* See how it works — red band like ManyChat purple band */
+/* See how it works — 2-col band */
 .usecases {
-  padding: 72px 0 96px;
+  padding: 64px 0 96px;
   border-top: 1px solid rgba(255,255,255,0.06);
 }
 .usecases-inner { padding: 0 28px; }
-.uc-howto {
-  margin: -12px auto 28px;
-  font-family: var(--display);
-  font-size: clamp(22px, 3vw, 28px);
-  font-weight: 750;
-  letter-spacing: -0.03em;
-}
 .uc-band {
   background:
-    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(255,77,99,0.35), transparent 55%),
-    linear-gradient(135deg, #9f1224 0%, var(--accent) 45%, #7a0e1c 100%);
-  padding: 36px 28px;
+    radial-gradient(ellipse 55% 70% at 85% 40%, rgba(255,77,99,0.28), transparent 55%),
+    linear-gradient(145deg, #8f101f 0%, var(--accent) 48%, #5c0a14 100%);
+  padding: 40px 28px;
 }
 .uc-band-inner {
   max-width: 1180px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.4fr) minmax(180px, 0.75fr);
-  gap: 22px;
-  align-items: center;
+  grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.25fr);
+  gap: 28px;
+  align-items: stretch;
+}
+.uc-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
 }
 .uc-list {
   background: #fff;
   border-radius: 16px;
-  padding: 10px;
+  padding: 8px;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.25);
 }
 .uc-item {
@@ -350,18 +390,24 @@ body.landing {
   background: transparent;
   border: none;
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 13px 14px;
   color: #1a1a1a;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: 2px;
+  min-height: 48px;
+  justify-content: center;
   transition: background 0.15s;
 }
 .uc-item:hover { background: rgba(225, 29, 55, 0.06); }
+.uc-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
 .uc-item.active { background: rgba(225, 29, 55, 0.1); }
 .uc-item-title {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 750;
   letter-spacing: -0.02em;
   line-height: 1.25;
@@ -376,27 +422,26 @@ body.landing {
 }
 .uc-item.active .uc-item-link { display: inline; }
 .uc-visual {
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.22);
   box-shadow: 0 30px 70px rgba(0,0,0,0.35);
-  background: #0f1218;
-}
-.uc-shot {
-  margin: 0;
-  animation: uc-fade 0.35s ease both;
-}
-@keyframes uc-fade {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  min-height: 280px;
 }
 .uc-copy {
   color: #fff;
   text-align: left;
+  padding: 4px 4px 0;
+}
+.uc-copy h3 {
+  margin: 0 0 10px;
+  font-family: var(--display);
+  font-size: clamp(18px, 2.2vw, 22px);
+  font-weight: 750;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
 }
 .uc-copy p {
-  margin: 0 0 18px;
-  font-size: 15px;
+  margin: 0 0 16px;
+  font-size: 14.5px;
   line-height: 1.55;
   color: rgba(255,255,255,0.88);
 }
@@ -411,9 +456,22 @@ body.landing {
   font-weight: 750;
   font-size: 14px;
   text-decoration: none;
-  transition: transform 0.15s;
+  transition: transform 0.15s, box-shadow 0.15s;
 }
-.uc-cta:hover { transform: translateY(-1px); }
+.uc-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.uc-cta:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.land-nav.is-scrolled {
+  background: rgba(7, 9, 13, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
 
 /* PLANS — vidIQ-inspired pricing grid, NicheScope red */
 .offers {
@@ -701,9 +759,12 @@ body.landing {
 .land-foot a:hover { color: var(--text); }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-atmosphere, .hero-copy, .hero-title, .hero-sub, .hero-cta, .uc-shot, .feat-shot {
+  .hero-atmosphere, .hero-copy, .hero-title, .hero-sub, .hero-cta,
+  .feat-shot, .uc-shot, .feat-item p {
     animation: none !important;
+    transition: none !important;
   }
+  .feat-shot, .uc-shot { transform: none !important; }
 }
 
 @media (max-width: 960px) {
@@ -711,10 +772,29 @@ body.landing {
   .plan-card.featured { transform: none; }
   .enterprise-band { grid-template-columns: 1fr; }
   .feat-stage { grid-template-columns: 1fr; }
+  .feat-list { position: static; }
+  .feat-item p { max-height: none; opacity: 0.85; margin-top: 6px; }
+  .feat-item:not(.active) p { display: none; }
   .uc-band-inner { grid-template-columns: 1fr; }
+  .uc-list {
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
+    padding: 8px;
+    scrollbar-width: none;
+  }
+  .uc-list::-webkit-scrollbar { display: none; }
+  .uc-item {
+    flex: 0 0 auto;
+    max-width: 200px;
+    white-space: normal;
+  }
+  .uc-item-link { display: none !important; }
   .uc-copy { text-align: center; }
-  .uc-copy p { margin-left: auto; margin-right: auto; }
-  .feat-item p { max-height: none; opacity: 1; }
+  .uc-copy p { margin-left: auto; margin-right: auto; max-width: 40ch; }
+  .uc-visual { order: -1; aspect-ratio: 16 / 11; }
+  .uc-band-inner { display: flex; flex-direction: column; }
 }
 
 @media (max-width: 640px) {
@@ -723,9 +803,10 @@ body.landing {
   .hero { padding: 0 16px 10vh; align-items: center; }
   .hero-brand { font-size: clamp(42px, 14vw, 72px); }
   .offers, .proof, .faq, .close, .features { padding: 56px 16px; }
-  .usecases { padding: 56px 0 72px; }
+  .usecases { padding: 48px 0 72px; }
   .usecases-inner { padding: 0 16px; }
   .uc-band { padding: 24px 16px; }
   .enterprise-band { padding: 22px; }
   .btn-hero { width: 100%; }
+  .uc-cta { width: 100%; }
 }

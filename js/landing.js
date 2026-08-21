@@ -277,7 +277,7 @@ function applyLandingI18n() {
   const btn = document.getElementById("langToggle");
   if (btn) btn.textContent = lt("lang_btn");
 
-  // Keep use-case / feature copy in sync after lang switch
+  // Keep use-case copy in sync after lang switch
   const activeUc = document.querySelector(".uc-item.active")?.getAttribute("data-uc") || "studio";
   applyUseCaseCopy(activeUc);
 }
@@ -289,59 +289,142 @@ const UC_COPY = {
   rankings: { title: "uc_rankings_title", body: "uc_rankings_body" },
 };
 
+const reduceMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 function applyUseCaseCopy(id) {
   const keys = UC_COPY[id] || UC_COPY.studio;
+  const title = document.getElementById("uc-title");
   const body = document.getElementById("uc-body");
+  if (title) title.textContent = lt(keys.title);
   if (body) body.textContent = lt(keys.body);
 }
 
-function switchPanels(selector, attr, id) {
-  document.querySelectorAll(selector).forEach(panel => {
-    const on = panel.getAttribute(attr) === id;
-    panel.hidden = !on;
-    if (on) {
-      panel.style.animation = "none";
-      void panel.offsetWidth;
-      panel.style.animation = "";
+function activatePanels(panelSelector, attr, id) {
+  document.querySelectorAll(panelSelector).forEach(panel => {
+    panel.classList.toggle("is-active", panel.getAttribute(attr) === id);
+  });
+}
+
+function wireTablist({ tabs, getId, onShow, root }) {
+  if (!tabs.length) return { show: () => {}, pause: () => {}, resume: () => {} };
+
+  let index = Math.max(0, tabs.findIndex(t => t.classList.contains("active")));
+  let timer = null;
+  let paused = false;
+
+  const show = (id, { user = false } = {}) => {
+    const next = tabs.findIndex(t => getId(t) === id);
+    if (next < 0) return;
+    index = next;
+    tabs.forEach((tab, i) => {
+      const on = i === index;
+      tab.classList.toggle("active", on);
+      tab.setAttribute("aria-selected", on ? "true" : "false");
+      tab.tabIndex = on ? 0 : -1;
+    });
+    onShow(getId(tabs[index]));
+    if (user) {
+      paused = true;
+      stop();
     }
+  };
+
+  const step = (dir) => {
+    const next = (index + dir + tabs.length) % tabs.length;
+    show(getId(tabs[next]), { user: true });
+    tabs[next].focus();
+  };
+
+  const stop = () => {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  };
+
+  const start = () => {
+    stop();
+    if (reduceMotion() || paused) return;
+    timer = setInterval(() => {
+      const next = (index + 1) % tabs.length;
+      show(getId(tabs[next]));
+    }, 5200);
+  };
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => show(getId(tab), { user: true }));
+    tab.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") {
+        e.preventDefault();
+        step(1);
+      } else if (e.key === "ArrowUp" || e.key === "ArrowLeft") {
+        e.preventDefault();
+        step(-1);
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        show(getId(tabs[0]), { user: true });
+        tabs[0].focus();
+      } else if (e.key === "End") {
+        e.preventDefault();
+        show(getId(tabs[tabs.length - 1]), { user: true });
+        tabs[tabs.length - 1].focus();
+      }
+    });
+  });
+
+  if (root) {
+    root.addEventListener("mouseenter", () => { paused = true; stop(); });
+    root.addEventListener("mouseleave", () => { paused = false; start(); });
+    root.addEventListener("focusin", () => { paused = true; stop(); });
+    root.addEventListener("focusout", (e) => {
+      if (!root.contains(e.relatedTarget)) {
+        paused = false;
+        start();
+      }
+    });
+  }
+
+  // init roving tabindex
+  tabs.forEach((tab, i) => { tab.tabIndex = i === index ? 0 : -1; });
+  show(getId(tabs[index]));
+  start();
+
+  return { show, pause: () => { paused = true; stop(); }, resume: () => { paused = false; start(); } };
+}
+
+function initFeatures() {
+  const tabs = [...document.querySelectorAll(".feat-item")];
+  const root = document.querySelector(".feat-stage");
+  wireTablist({
+    tabs,
+    getId: (t) => t.getAttribute("data-feat"),
+    onShow: (id) => activatePanels("[data-feat-panel]", "data-feat-panel", id),
+    root,
   });
 }
 
 function initUseCases() {
   const tabs = [...document.querySelectorAll(".uc-item")];
-  if (!tabs.length) return;
-
-  const show = (id) => {
-    tabs.forEach(tab => {
-      const on = tab.getAttribute("data-uc") === id;
-      tab.classList.toggle("active", on);
-      tab.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    switchPanels("[data-uc-panel]", "data-uc-panel", id);
-    applyUseCaseCopy(id);
-  };
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => show(tab.getAttribute("data-uc")));
+  const root = document.getElementById("uc-band");
+  wireTablist({
+    tabs,
+    getId: (t) => t.getAttribute("data-uc"),
+    onShow: (id) => {
+      activatePanels("[data-uc-panel]", "data-uc-panel", id);
+      applyUseCaseCopy(id);
+    },
+    root,
   });
 }
 
-function initFeatures() {
-  const tabs = [...document.querySelectorAll(".feat-item")];
-  if (!tabs.length) return;
-
-  const show = (id) => {
-    tabs.forEach(tab => {
-      const on = tab.getAttribute("data-feat") === id;
-      tab.classList.toggle("active", on);
-      tab.setAttribute("aria-selected", on ? "true" : "false");
-    });
-    switchPanels("[data-feat-panel]", "data-feat-panel", id);
+function initNavScroll() {
+  const nav = document.querySelector(".land-nav");
+  if (!nav) return;
+  const onScroll = () => {
+    nav.classList.toggle("is-scrolled", window.scrollY > 24);
   };
-
-  tabs.forEach(tab => {
-    tab.addEventListener("click", () => show(tab.getAttribute("data-feat")));
-  });
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
 }
 
 function wireOfferLink(el, { cal, mail, offer, fallback }) {
@@ -425,6 +508,7 @@ function refresh() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
+  initNavScroll();
   initFeatures();
   initUseCases();
   refresh();
