@@ -23,13 +23,12 @@ Si `db push` échoue, colle le SQL de `migrations/20260722100000_rankings.sql` d
 ## Secrets
 
 ```bash
-# Requis pour le cron (scan serveur)
+# Requis pour le cron uniquement (scan-daily). scan-keyword n’utilise jamais cette clé.
 npx supabase secrets set YOUTUBE_API_KEY=xxxxx
 npx supabase secrets set CRON_SECRET=$(openssl rand -hex 24)
-
-# Optionnel pour scan-keyword user-facing (sinon header x-youtube-key)
-# npx supabase secrets set YOUTUBE_API_KEY=xxxxx
 ```
+
+`scan-keyword` exige le header `x-youtube-key` (clé YouTube de l’utilisateur). Pas de fallback serveur.
 
 ## Cron quotidien (`scan-daily`)
 

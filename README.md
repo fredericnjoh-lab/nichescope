@@ -98,7 +98,7 @@ npx supabase functions deploy scan-keyword
 ```
 
 4. Dans l’app → onglet **Rankings** → colle **Project URL** + **anon key** (Settings → API)
-5. Ta clé YouTube reste dans le navigateur ; elle est envoyée à la Edge Function via `x-youtube-key` (quota utilisateur)
+5. Ta clé YouTube reste dans le navigateur ; elle est **obligatoire** sur `scan-keyword` via `x-youtube-key` (quota utilisateur). `YOUTUBE_API_KEY` sert uniquement au cron `scan-daily`.
 
 Tables : `tracked_keywords`, `ranking_snapshots` (RLS par `auth.uid()`).
 
