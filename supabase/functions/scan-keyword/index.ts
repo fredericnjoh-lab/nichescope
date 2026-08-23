@@ -1,10 +1,11 @@
 /**
  * Edge Function: scan a tracked keyword via YouTube Data API and write a ranking snapshot.
  *
- * Secrets (optional): YOUTUBE_API_KEY — fallback if client does not send x-youtube-key
  * Request JSON: { trackedKeywordId: string }
  * Header: Authorization: Bearer <user jwt>
- * Header (recommended): x-youtube-key: <user's YT key> — keeps quota on the user
+ * Header (required): x-youtube-key: <user's YT key>
+ *
+ * Never falls back to the server YOUTUBE_API_KEY — that secret is for scan-daily only.
  */
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.49.1";
@@ -21,12 +22,9 @@ Deno.serve(async (req) => {
 
   try {
     const authHeader = req.headers.get("Authorization") || "";
-    const youtubeKey =
-      req.headers.get("x-youtube-key") ||
-      Deno.env.get("YOUTUBE_API_KEY") ||
-      "";
+    const youtubeKey = (req.headers.get("x-youtube-key") || "").trim();
     if (!youtubeKey) {
-      return json({ error: "Missing YouTube API key (header x-youtube-key or secret YOUTUBE_API_KEY)" }, 400);
+      return json({ error: "Missing YouTube API key (header x-youtube-key required)" }, 400);
     }
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
@@ -56,6 +54,19 @@ Deno.serve(async (req) => {
 
     if (tErr || !tracked) {
       return json({ error: "Tracked keyword not found" }, 404);
+    }
+
+    const hourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+    const { count: recentScans, error: rateErr } = await userClient
+      .from("ranking_snapshots")
+      .select("id", { count: "exact", head: true })
+      .eq("user_id", userId)
+      .gte("captured_at", hourAgo);
+    if (rateErr) {
+      return json({ error: rateErr.message }, 500);
+    }
+    if ((recentScans ?? 0) >= 20) {
+      return json({ error: "Too many scans; try again later" }, 429);
     }
 
     const lang = tracked.lang === "en" ? "en" : "fr";
