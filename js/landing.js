@@ -427,6 +427,42 @@ function initNavScroll() {
   window.addEventListener("scroll", onScroll, { passive: true });
 }
 
+function initHeroParallax() {
+  const stage = document.getElementById("hero-stage");
+  const world = document.getElementById("stage-world");
+  if (!stage || !world || reduceMotion()) return;
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  let raf = 0;
+  let targetX = 0;
+  let targetY = 0;
+  let curX = 0;
+  let curY = 0;
+  const base = { x: 10, y: -16 };
+
+  const tick = () => {
+    curX += (targetX - curX) * 0.08;
+    curY += (targetY - curY) * 0.08;
+    world.style.transform = `rotateX(${base.x + curY}deg) rotateY(${base.y + curX}deg)`;
+    raf = requestAnimationFrame(tick);
+  };
+
+  stage.addEventListener("pointermove", (e) => {
+    const rect = stage.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+    targetX = nx * 10;
+    targetY = -ny * 7;
+  });
+  stage.addEventListener("pointerleave", () => {
+    targetX = 0;
+    targetY = 0;
+  });
+
+  raf = requestAnimationFrame(tick);
+  window.addEventListener("pagehide", () => cancelAnimationFrame(raf));
+}
+
 function wireOfferLink(el, { cal, mail, offer, fallback }) {
   if (!el) return;
   const href = (cal && calendlyHref(getBrand(), { offer })) || mail || fallback || "#contact";
@@ -509,6 +545,7 @@ function refresh() {
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
   initNavScroll();
+  initHeroParallax();
   initFeatures();
   initUseCases();
   refresh();
