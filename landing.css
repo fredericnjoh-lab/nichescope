@@ -1163,8 +1163,12 @@ body.landing.nav-open { overflow: hidden; }
   .nav-toggle { display: inline-flex; }
 
   .hero-layout { grid-template-columns: 1fr; gap: 28px; }
-  .hero-stage { height: 420px; min-height: 340px; order: -1; }
-  .stage-world { transform: rotateX(10deg) rotateY(-10deg); }
+  .hero-stage { height: 340px; min-height: 300px; order: -1; }
+  .stage-world { transform: rotateX(6deg) rotateY(-8deg); }
+  .float-back, .float-side { display: none; }
+  .float-main { width: 90%; left: 5%; top: 10%; transform: translateZ(40px); animation: none; }
+  .float-chip, .badge-seo { display: none; }
+  .hero-orbs { opacity: 0.5; }
   .plans-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .plan-card.featured { transform: none; }
   .plan-card:hover { transform: translateY(-4px); }
