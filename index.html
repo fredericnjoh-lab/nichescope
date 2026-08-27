@@ -43,18 +43,51 @@
   <main>
     <section class="hero" id="hero">
       <div class="hero-atmosphere" aria-hidden="true"></div>
-      <div class="hero-copy">
-        <p class="hero-brand" id="hero-brand">NicheScope</p>
-        <h1 class="hero-title">
-          <span data-i18n="hero_line1">Les niches YouTube</span><br />
-          <em data-i18n="hero_line2">qui rapportent vraiment</em>
-        </h1>
-        <p class="hero-sub" data-i18n="hero_sub">
-          L’outil gratuit pour creuser. L’audit payant pour livrer le plan.
-        </p>
-        <div class="hero-cta">
-          <a class="btn-hero primary" href="app.html" data-i18n="cta_studio">Lancer le studio gratuit</a>
-          <a class="btn-hero ghost" id="cta-calendly" href="#offres" data-i18n="cta_book">Voir les audits</a>
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-orbs" aria-hidden="true">
+        <span class="orb orb-a"></span>
+        <span class="orb orb-b"></span>
+        <span class="orb orb-c"></span>
+      </div>
+
+      <div class="hero-layout">
+        <div class="hero-copy">
+          <p class="hero-brand" id="hero-brand">NicheScope</p>
+          <h1 class="hero-title">
+            <span data-i18n="hero_line1">Les niches YouTube</span><br />
+            <em data-i18n="hero_line2">qui rapportent vraiment</em>
+          </h1>
+          <p class="hero-sub" data-i18n="hero_sub">
+            L’outil gratuit pour creuser. L’audit payant pour livrer le plan.
+          </p>
+          <div class="hero-cta">
+            <a class="btn-hero primary" href="app.html" data-i18n="cta_studio">Lancer le studio gratuit</a>
+            <a class="btn-hero ghost" id="cta-calendly" href="#offres" data-i18n="cta_book">Voir les audits</a>
+          </div>
+        </div>
+
+        <div class="hero-stage" id="hero-stage" aria-hidden="true">
+          <div class="stage-world" id="stage-world">
+            <div class="stage-floor"></div>
+            <figure class="float-card float-back">
+              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" loading="eager" />
+            </figure>
+            <figure class="float-card float-side">
+              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" loading="eager" />
+            </figure>
+            <figure class="float-card float-main">
+              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" loading="eager" />
+            </figure>
+            <div class="float-badge badge-cash">
+              <span>Cash Score</span>
+              <strong>86</strong>
+            </div>
+            <div class="float-badge badge-seo">
+              <span>SEO</span>
+              <strong>82</strong>
+            </div>
+            <div class="float-chip">RPM ↑</div>
+          </div>
         </div>
       </div>
     </section>
@@ -99,19 +132,21 @@
             </button>
           </div>
           </div>
-          <div class="feat-visual" aria-live="polite">
-            <figure class="feat-shot is-active" data-feat-panel="studio" id="feat-panel-studio">
-              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
-            </figure>
-            <figure class="feat-shot" data-feat-panel="seo" id="feat-panel-seo">
-              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
-            </figure>
-            <figure class="feat-shot" data-feat-panel="scorecard" id="feat-panel-scorecard">
-              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
-            </figure>
-            <figure class="feat-shot" data-feat-panel="rankings" id="feat-panel-rankings">
-              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
-            </figure>
+          <div class="feat-visual frame-3d" aria-live="polite">
+            <div class="frame-3d-inner">
+              <figure class="feat-shot is-active" data-feat-panel="studio" id="feat-panel-studio">
+                <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
+              </figure>
+              <figure class="feat-shot" data-feat-panel="seo" id="feat-panel-seo">
+                <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
+              </figure>
+              <figure class="feat-shot" data-feat-panel="scorecard" id="feat-panel-scorecard">
+                <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
+              </figure>
+              <figure class="feat-shot" data-feat-panel="rankings" id="feat-panel-rankings">
+                <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
+              </figure>
+            </div>
           </div>
         </div>
         <div class="feat-cta-row">
@@ -158,19 +193,21 @@
             </div>
           </div>
 
-          <div class="uc-visual" aria-live="polite">
-            <figure class="uc-shot is-active" data-uc-panel="studio" id="uc-panel-studio">
-              <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="seo" id="uc-panel-seo">
-              <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="scorecard" id="uc-panel-scorecard">
-              <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
-            </figure>
-            <figure class="uc-shot" data-uc-panel="rankings" id="uc-panel-rankings">
-              <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
-            </figure>
+          <div class="uc-visual frame-3d" aria-live="polite">
+            <div class="frame-3d-inner">
+              <figure class="uc-shot is-active" data-uc-panel="studio" id="uc-panel-studio">
+                <img src="assets/screenshots/studio.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_studio" loading="eager" />
+              </figure>
+              <figure class="uc-shot" data-uc-panel="seo" id="uc-panel-seo">
+                <img src="assets/screenshots/seo.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_seo" loading="lazy" />
+              </figure>
+              <figure class="uc-shot" data-uc-panel="scorecard" id="uc-panel-scorecard">
+                <img src="assets/screenshots/scorecard.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_scorecard" loading="lazy" />
+              </figure>
+              <figure class="uc-shot" data-uc-panel="rankings" id="uc-panel-rankings">
+                <img src="assets/screenshots/rankings.png" width="1280" height="800" alt="" data-i18n-alt="uc_alt_rankings" loading="lazy" />
+              </figure>
+            </div>
           </div>
         </div>
       </div>
