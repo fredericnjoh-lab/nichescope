@@ -508,7 +508,11 @@ body.landing.nav-open { overflow: hidden; }
 .feat-list-wrap,
 .uc-list-wrap {
   position: relative;
+  min-width: 0;
+  max-width: 100%;
 }
+.feat-list,
+.uc-list { min-width: 0; }
 .feat-list-wrap::after,
 .uc-list-wrap::after {
   content: "";
