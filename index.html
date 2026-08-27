@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23e11d37' width='100' height='100' rx='22'/%3E%3Ctext x='50' y='64' text-anchor='middle' fill='white' font-size='42' font-family='sans-serif' font-weight='700'%3ENS%3C/text%3E%3C/svg%3E" />
-  <link rel="stylesheet" href="landing.css" />
+  <link rel="stylesheet" href="landing.css?v=20260827" />
 </head>
 <body class="landing">
   <a class="skip-link" href="#hero" data-i18n="skip">Content</a>
@@ -21,14 +21,23 @@
       <span class="land-mark" id="brand-mark">NS</span>
       <span class="land-name" id="brand-name">NicheScope</span>
     </a>
-    <nav class="land-nav-links">
+    <div class="land-nav-actions">
+      <button type="button" class="lang-toggle" id="langToggle" aria-label="Language">FR</button>
+      <a class="land-nav-cta land-nav-cta--compact" id="nav-calendly" href="#offres" data-i18n="nav_book">Réserver</a>
+      <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" data-i18n-aria="nav_open" aria-label="Ouvrir le menu">
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+      </button>
+    </div>
+    <nav class="land-nav-links" id="navMenu" aria-label="Navigation principale">
       <a href="#features" data-i18n="nav_usecases">Cas d’usage</a>
       <a href="#offres" data-i18n="nav_offers">Offres</a>
       <a href="#faq" data-i18n="nav_faq">FAQ</a>
       <a href="app.html" data-i18n="nav_app">Ouvrir l’app</a>
-      <button type="button" class="lang-toggle" id="langToggle" aria-label="Language">FR</button>
-      <a class="land-nav-cta" id="nav-calendly" href="#offres" data-i18n="nav_book">Réserver</a>
+      <a class="land-nav-cta land-nav-cta--drawer" id="nav-calendly-drawer" href="#offres" data-i18n="nav_book">Réserver</a>
     </nav>
+    <div class="nav-overlay" id="navOverlay" hidden aria-hidden="true"></div>
   </header>
 
   <main>
@@ -56,7 +65,9 @@
         <h2 data-i18n="feat_h2">Mets ta croissance YouTube en pilote auto</h2>
         <p class="offers-lead" data-i18n="feat_lead">Trop de créateurs tournent sans savoir où est l’argent. Voici comment NicheScope rend le choix (et le plan) évident.</p>
 
+        <p class="feat-mobile-hint" data-i18n="feat_mobile_hint">Touchez un point pour voir l’aperçu</p>
         <div class="feat-stage">
+          <div class="feat-list-wrap">
           <div class="feat-list" role="tablist" aria-label="Bénéfices" id="feat-tabs">
             <button type="button" class="feat-item active" role="tab" aria-selected="true" aria-controls="feat-panel-studio" id="feat-tab-studio" data-feat="studio">
               <span class="feat-num" aria-hidden="true">01</span>
@@ -86,6 +97,7 @@
                 <p data-i18n="feat_rank_body">Sparklines + scans quotidiens. Tu sais si tu grimpes vraiment.</p>
               </span>
             </button>
+          </div>
           </div>
           <div class="feat-visual" aria-live="polite">
             <figure class="feat-shot is-active" data-feat-panel="studio" id="feat-panel-studio">
@@ -118,6 +130,8 @@
       <div class="uc-band" id="uc-band">
         <div class="uc-band-inner">
           <div class="uc-side">
+            <p class="uc-scroll-hint" data-i18n="uc_scroll_hint">Glissez pour explorer</p>
+            <div class="uc-list-wrap">
             <aside class="uc-list" role="tablist" aria-label="Cas d’usage" id="uc-tabs">
               <button type="button" class="uc-item active" role="tab" aria-selected="true" aria-controls="uc-panel-studio" id="uc-tab-studio" data-uc="studio">
                 <span class="uc-item-title" data-i18n="uc_tab_studio">Trouver une niche cash</span>
@@ -136,6 +150,7 @@
                 <span class="uc-item-link" data-i18n="uc_check">Voir →</span>
               </button>
             </aside>
+            </div>
             <div class="uc-copy">
               <h3 id="uc-title" data-i18n="uc_studio_title">Scanner une verticale et sortir les niches qui paient</h3>
               <p id="uc-body" data-i18n="uc_studio_body">Entre un thème (ex. finance perso). NicheScope classe les sous-niches par Cash Score — RPM, demande, facilité, affilié — pour savoir où tourner en premier.</p>
@@ -257,24 +272,24 @@
 
     <section class="faq" id="faq">
       <h2 data-i18n="faq_h2">FAQ</h2>
-      <dl class="faq-list">
-        <div>
-          <dt data-i18n="faq_1_q">L’app est vraiment gratuite ?</dt>
-          <dd data-i18n="faq_1_a">Oui. Tu utilises ta clé YouTube Data API. Pas de carte bancaire.</dd>
-        </div>
-        <div>
-          <dt data-i18n="faq_2_q">Quelle est la différence avec l’audit ?</dt>
-          <dd data-i18n="faq_2_a">L’app t’aide à explorer. L’audit est un livrable fait pour toi (analyse + plan + PDF), avec un délai et un call si Studio.</dd>
-        </div>
-        <div>
-          <dt data-i18n="faq_3_q">C’est quoi Pro ?</dt>
-          <dd data-i18n="faq_3_a">Le tracking keywords dans le temps (Rankings + cron) et les usages agence. Tu peux déjà self-hoster Rankings avec Supabase ; l’offre hébergée arrive ensuite.</dd>
-        </div>
-        <div>
-          <dt data-i18n="faq_4_q">Les prix incluent quoi ?</dt>
-          <dd data-i18n="faq_4_a">Flash = PDF en 48–72h. Studio = plan 4 semaines + call. Pas d’abonnement forcé sur les audits.</dd>
-        </div>
-      </dl>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary data-i18n="faq_1_q">L’app est vraiment gratuite ?</summary>
+          <p data-i18n="faq_1_a">Oui. Tu utilises ta clé YouTube Data API. Pas de carte bancaire.</p>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq_2_q">Quelle est la différence avec l’audit ?</summary>
+          <p data-i18n="faq_2_a">L’app t’aide à explorer. L’audit est un livrable fait pour toi (analyse + plan + PDF), avec un délai et un call si Studio.</p>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq_3_q">C’est quoi Pro ?</summary>
+          <p data-i18n="faq_3_a">Le tracking keywords dans le temps (Rankings + cron) et les usages agence. Tu peux déjà self-hoster Rankings avec Supabase ; l’offre hébergée arrive ensuite.</p>
+        </details>
+        <details class="faq-item">
+          <summary data-i18n="faq_4_q">Les prix incluent quoi ?</summary>
+          <p data-i18n="faq_4_a">Flash = PDF en 48–72h. Studio = plan 4 semaines + call. Pas d’abonnement forcé sur les audits.</p>
+        </details>
+      </div>
     </section>
 
     <section class="close" id="contact">
@@ -294,6 +309,6 @@
     <a href="https://github.com/fredericnjoh-lab/nichescope" target="_blank" rel="noopener">GitHub</a>
   </footer>
 
-  <script type="module" src="js/landing.js?v=20260821"></script>
+  <script type="module" src="js/landing.js?v=20260827"></script>
 </body>
 </html>
