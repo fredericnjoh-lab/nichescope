@@ -19,6 +19,10 @@ const LAND = {
     nav_faq: "FAQ",
     nav_app: "Ouvrir l’app",
     nav_book: "Réserver",
+    nav_open: "Ouvrir le menu",
+    nav_close: "Fermer le menu",
+    feat_mobile_hint: "Touchez un point pour voir l’aperçu",
+    uc_scroll_hint: "Glissez pour explorer",
     lang_btn: "EN",
     hero_line1: "Les niches YouTube",
     hero_line2: "qui rapportent vraiment",
@@ -135,6 +139,10 @@ const LAND = {
     nav_faq: "FAQ",
     nav_app: "Open app",
     nav_book: "Book",
+    nav_open: "Open menu",
+    nav_close: "Close menu",
+    feat_mobile_hint: "Tap a point to preview",
+    uc_scroll_hint: "Swipe to explore",
     lang_btn: "FR",
     hero_line1: "YouTube niches",
     hero_line2: "that actually pay",
@@ -277,6 +285,11 @@ function applyLandingI18n() {
   const btn = document.getElementById("langToggle");
   if (btn) btn.textContent = lt("lang_btn");
 
+  document.querySelectorAll("[data-i18n-aria]").forEach(el => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (key) el.setAttribute("aria-label", lt(key));
+  });
+
   // Keep use-case copy in sync after lang switch
   const activeUc = document.querySelector(".uc-item.active")?.getAttribute("data-uc") || "studio";
   applyUseCaseCopy(activeUc);
@@ -323,6 +336,7 @@ function wireTablist({ tabs, getId, onShow, root }) {
       tab.tabIndex = on ? 0 : -1;
     });
     onShow(getId(tabs[index]));
+    scrollActiveTabIntoView(tabs[index]);
     if (user) {
       paused = true;
       stop();
@@ -417,6 +431,43 @@ function initUseCases() {
   });
 }
 
+function initMobileNav() {
+  const nav = document.querySelector(".land-nav");
+  const toggle = document.getElementById("navToggle");
+  const overlay = document.getElementById("navOverlay");
+  const menu = document.getElementById("navMenu");
+  if (!nav || !toggle || !menu) return;
+
+  const setOpen = (open) => {
+    nav.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", open ? "true" : "false");
+    toggle.setAttribute("aria-label", lt(open ? "nav_close" : "nav_open"));
+    document.body.classList.toggle("nav-open", open);
+    if (overlay) {
+      overlay.hidden = !open;
+      overlay.classList.toggle("is-visible", open);
+      overlay.setAttribute("aria-hidden", open ? "false" : "true");
+    }
+  };
+
+  toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
+  overlay?.addEventListener("click", () => setOpen(false));
+  menu.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => setOpen(false));
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+  window.matchMedia("(min-width: 961px)").addEventListener("change", (e) => {
+    if (e.matches) setOpen(false);
+  });
+}
+
+function scrollActiveTabIntoView(tab) {
+  if (!tab || window.matchMedia("(min-width: 961px)").matches) return;
+  tab.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+}
+
 function initNavScroll() {
   const nav = document.querySelector(".land-nav");
   if (!nav) return;
@@ -499,7 +550,7 @@ function applyLandingBrand() {
   const mailDefault = mailtoHref(b);
   const bookHref = cal || mailDefault || "#offres";
 
-  ["nav-calendly", "cta-calendly", "cta-calendly-2"].forEach(id => {
+  ["nav-calendly", "nav-calendly-drawer", "cta-calendly", "cta-calendly-2"].forEach(id => {
     const el = document.getElementById(id);
     if (!el) return;
     el.setAttribute("href", bookHref);
@@ -542,12 +593,27 @@ function refresh() {
   applyLandingBrand();
 }
 
+function initScrollHints() {
+  document.querySelectorAll(".feat-list-wrap, .uc-list-wrap").forEach(wrap => {
+    const list = wrap.querySelector(".feat-list, .uc-list");
+    if (!list) return;
+    const update = () => {
+      wrap.classList.toggle("has-overflow", list.scrollWidth > list.clientWidth + 4);
+    };
+    update();
+    list.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadLang();
   initNavScroll();
+  initMobileNav();
   initHeroParallax();
   initFeatures();
   initUseCases();
+  initScrollHints();
   refresh();
   document.getElementById("langToggle")?.addEventListener("click", () => {
     setLang(getLang() === "fr" ? "en" : "fr");
